@@ -12,24 +12,20 @@
         <div class="max-w-10-xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg min-h-[600px]">
                 <div class="p-6 text-gray-600">
-                    {{ __("Pembuatan Surat Pengajuan Badge") }}
+                    {{ __(" Dashboard Pengajuan Badge") }}
                     @if ($role == 'admin')
                        
                     <!-- Button for creating new file -->
                     <div class="mt-4 flex space-x-4">
                         <a href="{{ route('pengajuan') }}" class="px-4 py-2 bg-green text-white font-bold text-xs uppercase rounded hover:bg-orange transition duration-300 ease-in-out">
                             + New File
-                        </a>
-                        
+                        </a>    
                     </div>
                     @endif
 
                     
 
                     <!-- Data Table -->
-                   
-
-                    
                     <div class="mt-4">
                         <table class="min-w-full table-auto">
                             <thead class="bg-gray-100">
@@ -99,7 +95,7 @@
                                         <td class="px-6 py-4 border-b border-gray-200 text-sm">
                                             <div class="flex items-center justify-start">
                                                 <span class="bg-yellow-300 text-black px-2 py-1 rounded">
-                                                    Menunggu Approval
+                                                    Approved
                                                 </span>
                                             </div>
                                         </td>
