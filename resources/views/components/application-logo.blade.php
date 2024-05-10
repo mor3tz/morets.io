@@ -1,0 +1,1 @@
+<img src="{{ asset('img/logodasarpkt.png') }}" class="block h-9 w-auto" alt="">
