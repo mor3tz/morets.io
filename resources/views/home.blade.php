@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-white leading-tight flex justify-between items-center">
-            {{ __('Home') }}
+            {{ __('HOME') }}
             <div class="text-right text-sm">
                 {{ __('FUTURE IS OURS') }}
             </div>
@@ -11,12 +11,12 @@
     <!-- Background image using inline style for better control -->
     <div style="display: flex; justify-content: center; align-items: center; height: 100vh;">
         <div style="background-image: url('{{ asset('img/nastuh-abootalebi-ZtC4_rPCRXA-unsplash.jpg') }}');
-                background-size: cover;
-                background-position: center;
-                background-attachment: fixed;
-                min-height: 100vh;
-                width: 100%;"
-                id="background">
+                    background-size: cover;
+                    background-position: center;
+                    background-attachment: fixed;
+                    min-height: 100vh;
+                    width: 100%;"
+                    id="background">
 
 
             <!-- Content of the page here -->
@@ -44,4 +44,13 @@
             text.style.opacity = 1 - scrollPosition / 400;
         });
     </script>
+
+    <style>
+        /* Responsiveness for smaller screens */
+        @media screen and (max-width: 640px) {
+            #background {
+                background-attachment: scroll;
+            }
+        }
+    </style>
 </x-app-layout>

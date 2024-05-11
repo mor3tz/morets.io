@@ -26,7 +26,7 @@
                     
 
                     <!-- Data Table -->
-                    <div class="mt-4">
+                    <div class="mt-4 overflow-x-auto">
                         <table class="min-w-full table-auto">
                             <thead class="bg-gray-100">
                                 <tr>
@@ -68,31 +68,31 @@
                             
                                 @foreach ($pengajuan as $pengajuan)
                                     <tr>
-                                        <td class="px-6 py-4 border-b border-gray-200 text-sm">
+                                        <td class="px-6 py-4 border-b border-gray-200 text-sm whitespace-nowrap">
                                             {{ $loop->iteration }}
                                         </td>
-                                        <td class="px-6 py-4 border-b border-gray-200 text-sm">
+                                        <td class="px-6 py-4 border-b border-gray-200 text-sm whitespace-nowrap">
                                             {{ $pengajuan->nama }}
                                         </td>
-                                        <td class="px-6 py-4 border-b border-gray-200 text-sm">
+                                        <td class="px-6 py-4 border-b border-gray-200 text-sm whitespace-nowrap">
                                             {{ $pengajuan->unit_kerja }}
                                         </td>
-                                        <td class="px-6 py-4 border-b border-gray-200 text-sm">
+                                        <td class="px-6 py-4 border-b border-gray-200 text-sm whitespace-nowrap">
                                             {{ $pengajuan->nama_perusahaan }}
                                         </td>
-                                        <td class="px-6 py-4 border-b border-gray-200 text-sm">
+                                        <td class="px-6 py-4 border-b border-gray-200 text-sm whitespace-nowrap">
                                             {{ $pengajuan->area }}
                                         </td>
-                                        <td class="px-6 py-4 border-b border-gray-200 text-sm">
+                                        <td class="px-6 py-4 border-b border-gray-200 text-sm whitespace-nowrap">
                                             {{ $pengajuan->no_ktp }}
                                         </td>
-                                        <td class="px-6 py-4 border-b border-gray-200 text-sm">
+                                        <td class="px-6 py-4 border-b border-gray-200 text-sm whitespace-nowrap">
                                             {{ $pengajuan->lama_bekerja }}
                                         </td>
-                                        <td class="px-6 py-4 border-b border-gray-200 text-sm">
+                                        <td class="px-6 py-4 border-b border-gray-200 text-sm whitespace-nowrap">
                                             {{ $pengajuan->tanggal_mulai }}
                                         </td>
-                                        <td class="px-6 py-4 border-b border-gray-200 text-sm">
+                                        <td class="px-6 py-4 border-b border-gray-200 text-sm whitespace-nowrap">
                                             <div class="flex items-center justify-start">
                                                 <span class="bg-yellow-300 text-black px-2 py-1 rounded">
                                                     Approved
@@ -100,7 +100,7 @@
                                             </div>
                                         </td>
                                         @if ($role == 'admin')
-                                        <td class="px-6 py-5 border-b border-gray-200 text-sm">
+                                        <td class="px-6 py-5 border-b border-gray-200 text-sm whitespace-nowrap">
                                             <div><a href="{{ route('pengajuan.show', ['id' => $pengajuan->id]) }}"
                                                  class="text-blue-500 hover:text-blue-600"> Detail</a></div>
                                             <div><a href="#" class="text-red-500 hover:text-red-600">Delete</a></div>

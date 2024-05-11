@@ -21,39 +21,45 @@
 
                 <div class="px-4 py-5 sm:p-6">
                     <!-- Personal information -->
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
-                        <div class="flex items-center">
-                            <span class="font-semibold mr-2">Nama :</span>
-                            <span>{{ $pengajuan->nama }}</span>
-                        </div>
-                        <div class="flex items-center">
-                            <span class="font-semibold mr-2">Unit Kerja :</span>
-                            <span>{{ $pengajuan->unit_kerja }}</span>
-                        </div>
-                        <div class="flex items-center">
-                            <span class="font-semibold mr-2">No. KTP :</span>
-                            <span>{{ $pengajuan->no_ktp }}</span>
-                        </div>
-                        <div class="flex items-center">
-                            <span class="font-semibold mr-2">Area :</span>
-                            <span>{{ $pengajuan->area }}</span>
-                        </div>
-                        <div class="col-span-2 flex items-center">
-                            <span class="font-semibold mr-2">Nama Perusahaan :</span>
-                            <span>{{ $pengajuan->nama_perusahaan }}</span>
-                        </div>
-                        <div class="flex items-center">
-                            <span class="font-semibold mr-2">Lama Bekerja :</span>
-                            <span>{{ $pengajuan->lama_bekerja }}</span>
-                        </div>
-                        <div class="flex items-center">
-                            <span class="font-semibold mr-2">Tanggal Mulai Bekerja :</span>
-                            <span>{{ $pengajuan->tanggal_mulai }}</span>
-                        </div>
-                        <div class="flex items-center">
-                            <span class="font-semibold mr-2">Status :</span>
-                            <span class="bg-yellow-300 text-yellow-800 px-2 py-1 rounded">{{ $pengajuan->status }}</span>
-                        </div>
+                    <div class="overflow-x-auto">
+                        <table class="table-auto w-full">
+                            <tbody>
+                                <tr>
+                                    <td class="font-semibold px-4 py-2">Nama :</td>
+                                    <td class="px-4 py-2">{{ $pengajuan->nama }}</td>
+                                </tr>
+                                <tr>
+                                    <td class="font-semibold px-4 py-2">Unit Kerja :</td>
+                                    <td class="px-4 py-2">{{ $pengajuan->unit_kerja }}</td>
+                                </tr>
+                                <tr>
+                                    <td class="font-semibold px-4 py-2">No. KTP :</td>
+                                    <td class="px-4 py-2">{{ $pengajuan->no_ktp }}</td>
+                                </tr>
+                                <tr>
+                                    <td class="font-semibold px-4 py-2">Area :</td>
+                                    <td class="px-4 py-2">{{ $pengajuan->area }}</td>
+                                </tr>
+                                <tr>
+                                    <td class="font-semibold px-4 py-2">Nama Perusahaan :</td>
+                                    <td class="px-4 py-2">{{ $pengajuan->nama_perusahaan }}</td>
+                                </tr>
+                                <tr>
+                                    <td class="font-semibold px-4 py-2">Lama Bekerja :</td>
+                                    <td class="px-4 py-2">{{ $pengajuan->lama_bekerja }}</td>
+                                </tr>
+                                <tr>
+                                    <td class="font-semibold px-4 py-2">Tanggal Mulai Bekerja :</td>
+                                    <td class="px-4 py-2">{{ $pengajuan->tanggal_mulai }}</td>
+                                </tr>
+                                <tr>
+                                    <td class="font-semibold px-4 py-2">Status :</td>
+                                    <td class="px-4 py-2">
+                                        <span class="bg-yellow-300 text-yellow-800 px-2 py-1 rounded">{{ $pengajuan->status }}</span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
@@ -67,19 +73,21 @@
                     </h3>
                 </div>
 
-                <div class="px-4 py-5 sm:p-6">
+                <div class="px-4 py-5 sm:p-6 text-center">
                     <!-- Document photos -->
-                    <div class="flex justify-center space-x-10">
-                        <div class="text-center">
+                    <div class="flex flex-col items-center space-y-4">
+                        <div>
                             <p class="font-semibold">Foto KTP</p>
-                            <img src="{{ asset('storage/foto_ktp/' . $pengajuan->foto_ktp) }}" alt="Foto KTP" class="w-32 h-32 rounded-lg shadow">
+                            <img src="{{ asset('storage/foto_ktp/' . $pengajuan->foto_ktp) }}" alt="Foto KTP" class="max-w-xs h-auto mx-auto rounded-lg shadow">
                         </div>
-                        <div class="text-center">
+                        <div>
                             <p class="font-semibold">Kartu Vaksin</p>
-                            <img src="{{ asset('storage/kartu_vaksin/' . $pengajuan->kartu_vaksin) }}" alt="Kartu Vaksin" class="w-32 h-32 rounded-lg shadow">
+                            <img src="{{ asset('storage/kartu_vaksin/' . $pengajuan->kartu_vaksin) }}" alt="Kartu Vaksin" class="max-w-xs h-auto mx-auto rounded-lg shadow">
                         </div>
                     </div>
                 </div>
+                
+                              
             </div>
         </div>
     </div>
