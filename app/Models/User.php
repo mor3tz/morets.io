@@ -47,6 +47,10 @@ class User extends Authenticatable
     }
 
     public function pengajuans(){
-        return $this->hasMany('App\models\Pengajuans');
+        return $this->hasMany(Pengajuan::class, 'user_id', 'id');
+    }
+
+    public function apprrovals(){
+        return $this->hasMany(Approval::class, 'approver_id', 'id');
     }
 }

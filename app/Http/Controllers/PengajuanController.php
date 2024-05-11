@@ -14,11 +14,38 @@ class PengajuanController extends Controller
      */
     public function index()
     {
-        $pengajuan = Pengajuan::all();
-        $role = Auth::user()->role;
-
-        return view('dashboard',['pengajuan' => $pengajuan, 'role' => $role]);
-    }
+        $user = Auth::user();
+        
+        if($user->role == "admin"){
+            $pengajuans = Pengajuan::all();
+        } else if($user->role == "user"){
+            $pengajuans = Pengajuan::where('user_id', $user->id)->get();
+        } else if($user->role == "kabag"){
+            $pengajuans = Pengajuan::doesntHave('approvals')->get();
+        }else if ($user->role === 'vp') {
+            // Ambil daftar pengajuan yang sudah diapprove oleh kabag
+            $pengajuans = Pengajuan::whereHas('approvals', function ($query) {
+                $query->where('approver_role', 'kabag')->where('approval_status', 'approved');
+            })->get();
+        }else if($user->role === 'avp'){
+            $pengajuans = Pengajuan::whereHas('approvals', function ($query) {
+                $query->where('approver_role', 'vp')->where('approval_status', 'approved');
+            })->get();
+        }else if($user->role === 'svp_operation'){
+            $pengajuans = Pengajuan::where('area', 'pabrik')->whereHas('approvals', function ($query) {
+                $query->where('approver_role', 'avp')->where('approval_status', 'approved');
+            })->get();
+        }else if($user->role === 'svp_security'){
+            $pengajuans = Pengajuan::where('area', 'kantor')->whereHas('approvals', function ($query) {
+                $query->where('approver_role', 'avp')->where('approval_status', 'approved');
+            })->get();
+        } else {
+            // Pengguna bukan VP, lakukan sesuai kebutuhan untuk role lainnya
+            $pengajuans = collect(); // Misalnya, inisialisasi dengan koleksi kosong
+        
+        }
+        return view('dashboard', ['pengajuan' => $pengajuans]);
+    }   
 
     /**
      * Show the form for creating a new resource.

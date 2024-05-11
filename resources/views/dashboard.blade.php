@@ -13,8 +13,8 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg min-h-[600px]">
                 <div class="p-6 text-gray-600">
                     {{ __(" Dashboard Pengajuan Badge") }}
-                    @if ($role == 'admin')
-                       
+                    @if (Auth::user()->role == 'admin')
+                
                     <!-- Button for creating new file -->
                     <div class="mt-4 flex space-x-4">
                         <a href="{{ route('pengajuan') }}" class="px-4 py-2 bg-green text-white font-bold text-xs uppercase rounded hover:bg-orange transition duration-300 ease-in-out">
@@ -57,7 +57,7 @@
                                     <th class="px-6 py-3 border-b border-gray-200 text-gray-800 text-left text-xs font-semibold uppercase tracking-wider">
                                         Status
                                     </th>
-                                    @if ($role == 'admin')
+                                    @if (Auth::user()->role != 'user')
                                     <th class="px-6 py-3 border-b border-gray-200 text-gray-800 text-left text-xs font-semibold uppercase tracking-wider">
                                         Actions
                                     </th>
@@ -95,15 +95,17 @@
                                         <td class="px-6 py-4 border-b border-gray-200 text-sm whitespace-nowrap">
                                             <div class="flex items-center justify-start">
                                                 <span class="bg-yellow-300 text-black px-2 py-1 rounded">
-                                                    Approved
+                                                    Pending
                                                 </span>
                                             </div>
                                         </td>
-                                        @if ($role == 'admin')
+                                        @if (Auth::user()->role != 'user')
                                         <td class="px-6 py-5 border-b border-gray-200 text-sm whitespace-nowrap">
                                             <div><a href="{{ route('pengajuan.show', ['id' => $pengajuan->id]) }}"
-                                                 class="text-blue-500 hover:text-blue-600"> Detail</a></div>
+                                                class="text-blue-500 hover:text-blue-600"> Detail</a></div>
+                                            @if (Auth::user()->role == 'admin')
                                             <div><a href="#" class="text-red-500 hover:text-red-600">Delete</a></div>
+                                            @endif
                                         </td>
                                         @endif
                                     </tr>

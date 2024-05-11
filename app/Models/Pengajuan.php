@@ -26,4 +26,12 @@ class Pengajuan extends Model
         'status'
     ];
 
+    public function user(){
+        return $this->belongsTo(User::class, 'user_id', 'id');
+    }
+
+    public function approvals(){
+        return $this->hasMany(Approval::class, 'pengajuan_id', 'id');
+    }
+
 }
