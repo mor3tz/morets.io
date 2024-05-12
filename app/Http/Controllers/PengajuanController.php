@@ -21,7 +21,7 @@ class PengajuanController extends Controller
         } else if($user->role == "user"){
             $pengajuans = Pengajuan::where('user_id', $user->id)->get();
         } else if($user->role == "kabag"){
-            $pengajuans = Pengajuan::doesntHave('approvals')->get();
+            $pengajuans = Pengajuan::all();
         }else if ($user->role === 'vp') {
             // Ambil daftar pengajuan yang sudah diapprove oleh kabag
             $pengajuans = Pengajuan::whereHas('approvals', function ($query) {

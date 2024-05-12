@@ -31,7 +31,7 @@ class Pengajuan extends Model
     }
 
     public function approvals(){
-        return $this->hasMany(Approval::class, 'pengajuan_id', 'id');
+        return $this->hasMany(Approval::class);
     }
 
 }
