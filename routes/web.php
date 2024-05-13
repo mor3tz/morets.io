@@ -16,6 +16,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/contact', function () {
         return view('contact');
     })->name('contact');
+    
     Route::get('/pengajuan', function () {
         return view('pengajuan.index');
     })->middleware(['role:admin,user'])->name('pengajuan');
