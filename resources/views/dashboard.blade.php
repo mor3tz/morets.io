@@ -94,9 +94,45 @@
                                         </td>
                                         <td class="px-6 py-4 border-b border-gray-200 text-sm whitespace-nowrap">
                                             <div class="flex items-center justify-start">
-                                                <span class="bg-yellow-300 text-black px-2 py-1 rounded">
-                                                    Pending
-                                                </span>
+                                                @if (Auth::user()->role == 'admin')
+                                                    @if (isset($pengajuan->latest_status))
+                                                        <span class="bg-{{ $pengajuan->latest_status_color }}-300 text-black px-2 py-1 rounded">
+                                                            {{ $pengajuan->latest_status }}
+                                                        </span>
+                                                    @else
+                                                        <span class="bg-yellow-300 text-black px-2 py-1 rounded">
+                                                            Pending
+                                                        </span>
+                                                    @endif
+                                                @elseif (Auth::user()->role == 'user')
+                                                    @if ($pengajuan->rejected)
+                                                        <span class="bg-red-300 text-black px-2 py-1 rounded">
+                                                            Rejected
+                                                        </span>
+                                                    @elseif ($pengajuan->approved_by_svp)
+                                                        <span class="bg-lime-300 text-black px-2 py-1 rounded">
+                                                            Approved
+                                                        </span>
+                                                    @else
+                                                        <span class="bg-yellow-300 text-black px-2 py-1 rounded">
+                                                            Pending
+                                                        </span>
+                                                    @endif
+                                                @else
+                                                    @if ($pengajuan->approved)
+                                                        <span class="bg-lime-300 text-black px-2 py-1 rounded">
+                                                            Approved
+                                                        </span>
+                                                    @elseif ($pengajuan->rejected)
+                                                        <span class="bg-red-300 text-black px-2 py-1 rounded">
+                                                            Rejected
+                                                        </span>
+                                                    @else
+                                                        <span class="bg-yellow-300 text-black px-2 py-1 rounded">
+                                                            Pending
+                                                        </span>
+                                                    @endif
+                                                @endif
                                             </div>
                                         </td>
                                         @if (Auth::user()->role != 'user')
@@ -112,8 +148,8 @@
 
                                         @if (Auth::user()->role == 'user')
                                             <!-- Modal toggle -->
-                                            <td>
-                                                <button data-modal-target="dtail{{ $pengajuan->id }}" data-modal-toggle="dtail{{ $pengajuan->id }}" class="block text-blue-500 hover:text-blue-600   font-medium  text-sm px-5 py-2.5 text-center " type="button">
+                                            <td class="px-6 py-4 border-b border-gray-200 text-sm whitespace-nowrap">
+                                                <button data-modal-target="dtail{{ $pengajuan->id }}" data-modal-toggle="dtail{{ $pengajuan->id }}" class="block text-blue-500 hover:text-blue-600   font-medium  text-sm text-center " type="button">
                                                 progress
                                                 </button>
                                             </td>

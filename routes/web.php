@@ -16,12 +16,12 @@ Route::middleware('auth')->group(function () {
     Route::get('/contact', function () {
         return view('contact');
     })->name('contact');
-    
     Route::get('/pengajuan', function () {
         return view('pengajuan.index');
     })->middleware(['role:admin,user'])->name('pengajuan');
     Route::post('pengajuan/store',[PengajuanController::class, 'store'])->middleware(['role:admin,user'])->name('pengajuan.store');
     Route::get('pengajuan/dtail/{id}',[PengajuanController::class, 'show'])->name('pengajuan.show');
+    Route::post('pengajuan/update/{id}',[PengajuanController::class, 'approveOrReject'])->name('pengajuan.approve');
 });
 
 Route::middleware('auth')->group(function () {

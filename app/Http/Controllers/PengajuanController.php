@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Approval;
 use App\Models\Pengajuan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -12,40 +13,70 @@ class PengajuanController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
-    {
+    public function index(){
         $user = Auth::user();
-        
-        if($user->role == "admin"){
-            $pengajuans = Pengajuan::all();
-        } else if($user->role == "user"){
-            $pengajuans = Pengajuan::where('user_id', $user->id)->get();
-        } else if($user->role == "kabag"){
-            $pengajuans = Pengajuan::all();
-        }else if ($user->role === 'vp') {
-            // Ambil daftar pengajuan yang sudah diapprove oleh kabag
-            $pengajuans = Pengajuan::whereHas('approvals', function ($query) {
-                $query->where('approver_role', 'kabag')->where('approval_status', 'approved');
-            })->get();
-        }else if($user->role === 'avp'){
-            $pengajuans = Pengajuan::whereHas('approvals', function ($query) {
-                $query->where('approver_role', 'vp')->where('approval_status', 'approved');
-            })->get();
-        }else if($user->role === 'svp_operation'){
-            $pengajuans = Pengajuan::where('area', 'pabrik')->whereHas('approvals', function ($query) {
-                $query->where('approver_role', 'avp')->where('approval_status', 'approved');
-            })->get();
-        }else if($user->role === 'svp_security'){
-            $pengajuans = Pengajuan::where('area', 'kantor')->whereHas('approvals', function ($query) {
-                $query->where('approver_role', 'avp')->where('approval_status', 'approved');
-            })->get();
-        } else {
-            // Pengguna bukan VP, lakukan sesuai kebutuhan untuk role lainnya
-            $pengajuans = collect(); // Misalnya, inisialisasi dengan koleksi kosong
-        
+        $pengajuans = collect(); // Default inisialisasi sebagai koleksi kosong
+    
+        switch ($user->role) {
+            case 'admin':
+            case 'kabag':
+                $pengajuans = Pengajuan::orderBy('created_at', 'desc')->get();
+                break;
+            case 'user':
+                $pengajuans = Pengajuan::where('user_id', $user->id)->orderBy('created_at', 'desc')->get();
+                break;
+            case 'vp':
+                $pengajuans = Pengajuan::whereHas('approvals', function ($query) {
+                    $query->where('approver_role', 'kabag')->where('approval_status', 'approved');
+                })->orderBy('created_at', 'desc')->get();
+                break;
+            case 'avp':
+                $pengajuans = Pengajuan::whereHas('approvals', function ($query) {
+                    $query->where('approver_role', 'vp')->where('approval_status', 'approved');
+                })->orderBy('created_at', 'desc')->get();
+                break;
+            case 'svp_operation':
+                $pengajuans = Pengajuan::where('area', 'pabrik')->whereHas('approvals', function ($query) {
+                    $query->where('approver_role', 'avp')->where('approval_status', 'approved');
+                })->orderBy('created_at', 'desc')->get();
+                break;
+            case 'svp_security':
+                $pengajuans = Pengajuan::where('area', 'kantor')->whereHas('approvals', function ($query) {
+                    $query->where('approver_role', 'avp')->where('approval_status', 'approved');
+                })->orderBy('created_at', 'desc')->get();
+                break;
         }
+
+        $pengajuans->each(function ($pengajuan) use ($user) {
+            if ($user->role == 'user') {
+                $pengajuan->rejected = $pengajuan->approvals()
+                                                ->where('approval_status', 'rejected')
+                                                ->exists();
+                $pengajuan->approved_by_svp = $pengajuan->approvals()
+                                                        ->where('approval_status', 'approved')
+                                                        ->whereIn('approver_role', ['svp_operation', 'svp_security'])
+                                                        ->exists();
+            } else {
+                $pengajuan->approved = $pengajuan->approvals()
+                                                ->where('approver_role', $user->role)
+                                                ->where('approval_status', 'approved')
+                                                ->exists();
+                $pengajuan->rejected = $pengajuan->approvals()
+                                                ->where('approver_role', $user->role)
+                                                ->where('approval_status', 'rejected')
+                                                ->exists();
+                if ($user->role == 'admin') {
+                    $latestApproval = $pengajuan->approvals()->latest()->first();
+                    if ($latestApproval) {
+                        $pengajuan->latest_status = $latestApproval->approval_status . ' by ' . $latestApproval->user->name;
+                        $pengajuan->latest_status_color = $latestApproval->approval_status === 'approved' ? 'lime' : ($latestApproval->approval_status === 'rejected' ? 'red' : 'yellow');
+                    }
+                }        
+            }
+        });
+
         return view('dashboard', ['pengajuan' => $pengajuans]);
-    }   
+    }
 
     /**
      * Show the form for creating a new resource.
@@ -107,32 +138,71 @@ class PengajuanController extends Controller
      * Display the specified resource.
      */
     public function show(string $id)
-    {
+    {   
+        $user = Auth::user();
+        $pengajuan = Pengajuan::find($id);
+        
+        if (!$pengajuan) {
+            return redirect()->back();
+        }
+
+        switch ($user->role) {
+            case 'admin':
+            case 'kabag':
+                // Tidak perlu mengubah apa pun untuk admin dan kabag
+                break;
+            case 'vp':
+                if (!$pengajuan->approvals()->where('approver_role', 'kabag')->where('approval_status', 'approved')->exists()) {
+                    return redirect()->back();
+                }
+                break;
+            case 'avp':
+                if (!$pengajuan->approvals()->where('approver_role', 'vp')->where('approval_status', 'approved')->exists()) {
+                    return redirect()->back();
+                }
+                break;
+            case 'svp_operation':
+                if ($pengajuan->area != 'pabrik' || !$pengajuan->approvals()->where('approver_role', 'avp')->where('approval_status', 'approved')->exists()) {
+                    return redirect()->back();
+                }
+                break;
+            case 'svp_security':
+                if ($pengajuan->area != 'kantor' || !$pengajuan->approvals()->where('approver_role', 'avp')->where('approval_status', 'approved')->exists()) {
+                    return redirect()->back();
+                }
+                break;
+            default:
+                return redirect()->back();
+        }
+
+        return view('pengajuan.dtail', ['pengajuan' => $pengajuan]);
+    }
+
+    public function approveOrReject(Request $request, $id){
+        $request->validate([
+            'approval_status' => 'required|in:approved,rejected',
+        ]);
+
+        $user = Auth::user();
         $pengajuan = Pengajuan::findOrFail($id);
-        return view('pengajuan.dtail',['pengajuan' => $pengajuan]);
-    }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
+        // Buat entri baru di tabel approvals
+        Approval::create([
+            'pengajuan_id' => $pengajuan->id,
+            'approver_id' => $user->id,
+            'approver_role' => $user->role,
+            'approval_status' => $request->approval_status,
+            'approval_date' => now(),
+        ]);
+        if($request->approval_status == 'rejected'){
+            $pengajuan->status = 'rejected';
+            $pengajuan->save();
+        }
+        if($request->approval_status == 'approved' && $user->role == 'svp_operation' || $user->role == 'svp_security'){
+            $pengajuan->status = 'approved';
+            $pengajuan->save();
+        }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+        return redirect()->route('dashboard')->with('status', 'Pengajuan telah ' . $request->approval_status);
     }
 }
