@@ -126,11 +126,11 @@ class PengajuanController extends Controller
 
         } catch (\Exception $e) {
             Log::error("Error in storing data: " . $e->getMessage());
-            return redirect()->back()->with(['error' => 'Data Gagal Disimpan!']);
+            return redirect()->back()->with(['errors' => 'Data Gagal Disimpan!']);
         }
 
        
-        return redirect()->route('dashboard')->with(['success' => 'Data Berhasil Disimpan!']);
+        return redirect()->route('dashboard')->with(['sukses' => 'Data Berhasil Disimpan!']);
 
     }
 
@@ -203,6 +203,13 @@ class PengajuanController extends Controller
             $pengajuan->save();
         }
 
-        return redirect()->route('dashboard')->with('status', 'Pengajuan telah ' . $request->approval_status);
+        return redirect()->route('dashboard')->with(['sukses'=> 'Pengajuan telah ' . $request->approval_status]);
+    }
+
+    public function delete($id){
+        $pengajuan = Pengajuan::findOrFail($id);
+        $pengajuan->approvals()->delete();
+        $pengajuan->delete();
+        return redirect()->back()->with(['sukses'=> 'Pengajuan telah dihapus']);
     }
 }
