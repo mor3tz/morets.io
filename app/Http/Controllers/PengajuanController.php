@@ -40,7 +40,7 @@ class PengajuanController extends Controller
                     $query->where('approver_role', 'avp')->where('approval_status', 'approved');
                 })->orderBy('created_at', 'desc')->get();
                 break;
-            case 'svp_security':
+            case 'vp_security':
                 $pengajuans = Pengajuan::where('area', 'kantor')->whereHas('approvals', function ($query) {
                     $query->where('approver_role', 'avp')->where('approval_status', 'approved');
                 })->orderBy('created_at', 'desc')->get();
@@ -54,7 +54,7 @@ class PengajuanController extends Controller
                                                 ->exists();
                 $pengajuan->approved_by_svp = $pengajuan->approvals()
                                                         ->where('approval_status', 'approved')
-                                                        ->whereIn('approver_role', ['svp_operation', 'svp_security'])
+                                                        ->whereIn('approver_role', ['svp_operation', 'vp_security'])
                                                         ->exists();
             } else {
                 $pengajuan->approved = $pengajuan->approvals()
@@ -166,7 +166,7 @@ class PengajuanController extends Controller
                     return redirect()->back();
                 }
                 break;
-            case 'svp_security':
+            case 'vp_security':
                 if ($pengajuan->area != 'kantor' || !$pengajuan->approvals()->where('approver_role', 'avp')->where('approval_status', 'approved')->exists()) {
                     return redirect()->back();
                 }
@@ -198,7 +198,7 @@ class PengajuanController extends Controller
             $pengajuan->status = 'rejected';
             $pengajuan->save();
         }
-        if($request->approval_status == 'approved' && $user->role == 'svp_operation' || $user->role == 'svp_security'){
+        if($request->approval_status == 'approved' && $user->role == 'svp_operation' || $user->role == 'vp_security'){
             $pengajuan->status = 'approved';
             $pengajuan->save();
         }
