@@ -28,24 +28,27 @@
               </div>
             
               <div class="mt-8 sm:col-span-2">
-                  <label for="foto_ktp" class="block text-bold font-medium leading-6 text-gray-900">Fotocopy KTP</label>
-                  <div class="mt-2 flex justify-center rounded-lg border border-dashed border-gray-900/25 px-6 py-10">
-                      <label for="foto_ktp" class="relative cursor-pointer rounded-md bg-white font-semibold text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-600 hover:text-indigo-500">
-                          <span>Upload a file</span>
-                          <input required id="foto_ktp" name="foto_ktp" type="file" class="sr-only">
-                      </label>
-                  </div>
-              </div>
+                <label for="foto_ktp" class="block text-bold font-medium leading-6 text-gray-900">Fotocopy KTP</label>
+                <div class="mt-2 flex justify-center rounded-lg border border-dashed border-gray-900/25 px-6 py-10">
+                    <label for="foto_ktp" class="relative cursor-pointer rounded-md bg-white font-semibold text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-600 hover:text-indigo-500">
+                        <span id="upload-text-ktp">Upload a file</span>
+                        <input required id="foto_ktp" name="foto_ktp" type="file" class="sr-only" onchange="showUploadFileName('ktp')">
+                    </label>
+                </div>
+                <p id="file-name-ktp" class="mt-2 text-sm text-gray-600"></p>
+            </div>
             
-              <div class="mt-8 sm:col-span-2">
-                  <label for="kartu_vaksin" class="block text-bold font-medium leading-6 text-gray-900">Kartu Vaksin Booster</label>
-                  <div class="mt-2 flex justify-center rounded-lg border border-dashed border-gray-900/25 px-6 py-10">
-                      <label for="kartu_vaksin" class="relative cursor-pointer rounded-md bg-white font-semibold text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-600 hover:text-indigo-500">
-                          <span>Upload a file</span>
-                          <input required id="kartu_vaksin" name="kartu_vaksin" type="file" class="sr-only">
-                      </label>
-                  </div>
-              </div>
+            <div class="mt-8 sm:col-span-2">
+                <label for="kartu_vaksin" class="block text-bold font-medium leading-6 text-gray-900">Kartu Vaksin Booster</label>
+                <div class="mt-2 flex justify-center rounded-lg border border-dashed border-gray-900/25 px-6 py-10">
+                    <label for="kartu_vaksin" class="relative cursor-pointer rounded-md bg-white font-semibold text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-600 hover:text-indigo-500">
+                        <span id="upload-text-vaksin">Upload a file</span>
+                        <input required id="kartu_vaksin" name="kartu_vaksin" type="file" class="sr-only" onchange="showUploadFileName('vaksin')">
+                    </label>
+                </div>
+                <p id="file-name-vaksin" class="mt-2 text-sm text-gray-600"></p>
+            </div>
+            
   
               <!-- Area field -->
               <div>
