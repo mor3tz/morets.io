@@ -37,10 +37,6 @@
         text-shadow: 0 4px 6px rgb(56, 56, 56);
         
     }
-
-    
-
-
 </style>
 
 
