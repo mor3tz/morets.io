@@ -21,10 +21,12 @@
                       <label for="first-name" class="block text-bold font-medium leading-6 text-gray-900 mt-3">Nama</label>
                       <input required type="text" name="nama" id="first-name" autocomplete="given-name" class="block w-full rounded-md border-gray-300 py-2 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
                   </div>
+                  <x-input-error :messages="$errors->get('nama')" class="mt-2" />
                   <div>
                       <label for="no_ktp" class="block text-bold font-medium leading-6 text-gray-900 mt-3">No. KTP</label>
                       <input required type="text" name="no_ktp" id="no_ktp" autocomplete="family-name" class="block w-full rounded-md border-gray-300 py-2 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
                   </div>
+                  <x-input-error :messages="$errors->get('no_ktp')" class="mt-2" />
               </div>
             
               <div class="mt-8 sm:col-span-2">
@@ -35,6 +37,7 @@
                         <input required id="foto_ktp" name="foto_ktp" type="file" class="sr-only" onchange="showUploadFileName('ktp')">
                     </label>
                 </div>
+                <x-input-error :messages="$errors->get('foto_ktp')" class="mt-2" />
                 <p id="file-name-ktp" class="mt-2 text-sm text-gray-600"></p>
             </div>
             
@@ -46,6 +49,7 @@
                         <input required id="kartu_vaksin" name="kartu_vaksin" type="file" class="sr-only" onchange="showUploadFileName('vaksin')">
                     </label>
                 </div>
+                <x-input-error :messages="$errors->get('kartu_vaksin')" class="mt-2" />
                 <p id="file-name-vaksin" class="mt-2 text-sm text-gray-600"></p>
             </div>
             
@@ -57,30 +61,35 @@
                       <option>Kantor</option>
                       <option>Pabrik</option>
                   </select>
+                  <x-input-error :messages="$errors->get('area')" class="mt-2" />
               </div>
   
               <!-- Unit Kerja field -->
               <div>
                   <label for="first-name" class="block text-bold font-medium leading-6 text-gray-900 mt-8">Unit Kerja</label>
                   <input required type="text" name="unit_kerja" id="first-name" autocomplete="given-name" class="block w-full rounded-md border-gray-300 py-2 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
-              </div>
+                  <x-input-error :messages="$errors->get('unit_kerja')" class="mt-2" />
+                </div>
   
               <!-- Nama Perusahaan field -->
               <div>
                   <label for="first-name-1" class="block text-bold font-medium leading-6 text-gray-900 mt-8">Nama Perusahaan</label>
                   <input required type="text" name="nama_perusahaan" id="first-name-1" autocomplete="given-name" class="block w-full rounded-md border-gray-300 py-2 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
+                  <x-input-error :messages="$errors->get('nama_perusahaan')" class="mt-2" />
               </div>
   
               <!-- Lama Bekerja field -->
               <div>
                   <label for="first-name-2" class="block text-bold font-medium leading-6 text-gray-900 mt-8">Berapa Lama Bekerja</label>
                   <input required type="text" name="lama_bekerja" id="first-name-2" autocomplete="given-name" class="block w-full rounded-md border-gray-300 py-2 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
+                  <x-input-error :messages="$errors->get('lama_bekerja')" class="mt-2" />
               </div>
   
               <!-- Tanggal Mulai Bekerja field -->
               <div>
                   <label for="first-name-2" class="block text-bold font-medium leading-6 text-gray-900 mt-8">Tanggal Mulai Bekerja</label>
                   <input required type="date" name="tanggal_mulai" id="first-name-2" autocomplete="given-name" class="block w-full rounded-md border-gray-300 py-2 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
+                  <x-input-error :messages="$errors->get('tanggal_mulai')" class="mt-2" />
               </div>
   
           </div>

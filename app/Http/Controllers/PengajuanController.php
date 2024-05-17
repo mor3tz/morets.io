@@ -13,7 +13,8 @@ class PengajuanController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(){
+    public function index()
+    {
         $user = Auth::user();
         $pengajuans = collect(); // Default inisialisasi sebagai koleksi kosong
     
@@ -46,7 +47,8 @@ class PengajuanController extends Controller
                 })->orderBy('created_at', 'desc')->get();
                 break;
         }
-
+    
+        // Proses pengajuans untuk menambahkan status tambahan
         $pengajuans->each(function ($pengajuan) use ($user) {
             if ($user->role == 'user') {
                 $pengajuan->rejected = $pengajuan->approvals()
@@ -71,12 +73,27 @@ class PengajuanController extends Controller
                         $pengajuan->latest_status = $latestApproval->approval_status . ' by ' . $latestApproval->user->name;
                         $pengajuan->latest_status_color = $latestApproval->approval_status === 'approved' ? 'lime' : ($latestApproval->approval_status === 'rejected' ? 'red' : 'yellow');
                     }
-                }        
+                }
             }
         });
+    
+        // Kelompokkan pengajuans berdasarkan nama_perusahaan
+        $pengajuansByPerusahaan = $pengajuans->groupBy('nama_perusahaan');
+        $pengajuansByPerusahaan = $pengajuans->groupBy(function($item) {
+            return strtoupper($item->nama_perusahaan);
+        });
 
-        return view('dashboard', ['pengajuan' => $pengajuans]);
+        // Struktur data yang diinginkan
+        $perusahaan = $pengajuansByPerusahaan->map(function ($items, $key) {
+            return [
+                'nama_perusahaan' => $key,
+                'pengajuans' => $items
+            ];
+        });
+    
+        return view('dashboard', ['perusahaan' => $perusahaan]);
     }
+    
 
     /**
      * Show the form for creating a new resource.
@@ -105,17 +122,21 @@ class PengajuanController extends Controller
 
         try {
             $foto_ktp = $request->file('foto_ktp');
-            $foto_ktp->storeAs('public/foto_ktp', $foto_ktp->hashName());
+            $ktp_filename = str_replace(' ', '_', $foto_ktp->getClientOriginalName());
+            $ktp_filename_hashed = $foto_ktp->hashName();
+            $foto_ktp->storeAs('public/foto_ktp', $ktp_filename_hashed);
 
             $kartu_vaksin = $request->file('kartu_vaksin');
-            $kartu_vaksin->storeAs('public/kartu_vaksin', $kartu_vaksin->hashName());
+            $vaksin_filename = str_replace(' ', '_', $kartu_vaksin->getClientOriginalName());
+            $vaksin_filename_hashed = $kartu_vaksin->hashName();
+            $kartu_vaksin->storeAs('public/kartu_vaksin', $vaksin_filename_hashed);
 
             Pengajuan::create([
                 'user_id' => Auth::user()->id,
                 'nama' => $request->nama,
                 'no_ktp' => $request->no_ktp,
-                'foto_ktp' => $foto_ktp->hashName(),
-                'kartu_vaksin' => $kartu_vaksin->hashName(),
+                'foto_ktp' => $ktp_filename,
+                'kartu_vaksin' => $vaksin_filename,
                 'area' => $request->area,
                 'unit_kerja' => $request->unit_kerja,
                 'nama_perusahaan' => $request->nama_perusahaan,
@@ -129,9 +150,7 @@ class PengajuanController extends Controller
             return redirect()->back()->with(['errors' => 'Data Gagal Disimpan!']);
         }
 
-       
         return redirect()->route('dashboard')->with(['sukses' => 'Data Berhasil Disimpan!']);
-
     }
 
     /**
@@ -141,6 +160,12 @@ class PengajuanController extends Controller
     {   
         $user = Auth::user();
         $pengajuan = Pengajuan::find($id);
+        $latestApproval = $pengajuan->approvals()->latest()->first();
+
+        if ($latestApproval->role != "svp_operation" && $latestApproval->role != "vp_security") {
+            $pengajuan->latest_status = $latestApproval->approval_status . ' by ' . $latestApproval->user->name;
+            $pengajuan->latest_status_color = $latestApproval->approval_status === 'approved' ? 'lime' : ($latestApproval->approval_status === 'rejected' ? 'red' : 'yellow');
+        }
         
         if (!$pengajuan) {
             return redirect()->back();
@@ -202,6 +227,7 @@ class PengajuanController extends Controller
             $pengajuan->status = 'approved';
             $pengajuan->save();
         }
+
 
         return redirect()->route('dashboard')->with(['sukses'=> 'Pengajuan telah ' . $request->approval_status]);
     }
