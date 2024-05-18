@@ -135,8 +135,8 @@ class PengajuanController extends Controller
                 'user_id' => Auth::user()->id,
                 'nama' => $request->nama,
                 'no_ktp' => $request->no_ktp,
-                'foto_ktp' => $ktp_filename,
-                'kartu_vaksin' => $vaksin_filename,
+                'foto_ktp' => $ktp_filename_hashed,
+                'kartu_vaksin' => $vaksin_filename_hashed,
                 'area' => $request->area,
                 'unit_kerja' => $request->unit_kerja,
                 'nama_perusahaan' => $request->nama_perusahaan,
@@ -162,10 +162,13 @@ class PengajuanController extends Controller
         $pengajuan = Pengajuan::find($id);
         $latestApproval = $pengajuan->approvals()->latest()->first();
 
-        if ($latestApproval->role != "svp_operation" && $latestApproval->role != "vp_security") {
-            $pengajuan->latest_status = $latestApproval->approval_status . ' by ' . $latestApproval->user->name;
-            $pengajuan->latest_status_color = $latestApproval->approval_status === 'approved' ? 'lime' : ($latestApproval->approval_status === 'rejected' ? 'red' : 'yellow');
+        if($latestApproval){            
+            if ($latestApproval->role != "svp_operation" && $latestApproval->role != "vp_security") {
+                $pengajuan->latest_status = $latestApproval->approval_status . ' by ' . $latestApproval->user->name;
+                $pengajuan->latest_status_color = $latestApproval->approval_status === 'approved' ? 'lime' : ($latestApproval->approval_status === 'rejected' ? 'red' : 'yellow');
+            }
         }
+
         
         if (!$pengajuan) {
             return redirect()->back();
