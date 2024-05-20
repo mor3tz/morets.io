@@ -122,12 +122,10 @@ class PengajuanController extends Controller
 
         try {
             $foto_ktp = $request->file('foto_ktp');
-            $ktp_filename = str_replace(' ', '_', $foto_ktp->getClientOriginalName());
             $ktp_filename_hashed = $foto_ktp->hashName();
             $foto_ktp->storeAs('public/foto_ktp', $ktp_filename_hashed);
 
             $kartu_vaksin = $request->file('kartu_vaksin');
-            $vaksin_filename = str_replace(' ', '_', $kartu_vaksin->getClientOriginalName());
             $vaksin_filename_hashed = $kartu_vaksin->hashName();
             $kartu_vaksin->storeAs('public/kartu_vaksin', $vaksin_filename_hashed);
 
@@ -233,6 +231,26 @@ class PengajuanController extends Controller
 
 
         return redirect()->route('dashboard')->with(['sukses'=> 'Pengajuan telah ' . $request->approval_status]);
+    }
+
+
+    public function manyApprove(Request $request){
+        $user = Auth::user();
+        foreach($request->pengajuans as $id){
+            $pengajuan = Pengajuan::findOrFail($id);
+            if(!$pengajuan->approvals()->where('approver_role', $user->role )->where('approval_status', 'approved')->exists()){     
+                Approval::create([
+                    'pengajuan_id' => $pengajuan->id,
+                    'approver_id' => $user->id,
+                    'approver_role' => $user->role,
+                    'approval_status' => 'approved',
+                    'approval_date' => now(),
+                ]);
+            }
+
+        }
+        return redirect()->route('dashboard')->with(['sukses'=> 'Pengajuan telah diapprove']);
+
     }
 
     public function delete($id){
