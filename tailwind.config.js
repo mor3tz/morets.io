@@ -19,6 +19,7 @@ export default {
                 'green': '#87A922', 
                 'orange': '#FC4100', 
                 'white-custom': '#F5F7F8',
+                'table-color' : '#EEEEEE'
             },
         },
     },

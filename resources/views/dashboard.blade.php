@@ -71,7 +71,8 @@
                     <!-- Data Table -->
                     <div class="mt-4 overflow-x-auto">
                         <table class="min-w-full table-auto">
-                            <thead class="bg-gray-100">
+                            <!-- TABLE HEAD -->
+                            <thead class=" ">
                                 <tr>
                                     <th class="px-6 py-3 border-b border-gray-200 text-gray-800 text-left text-xs font-semibold uppercase tracking-wider">
                                         No
@@ -105,10 +106,11 @@
                                     </th>
                                 </tr>
                             </thead>
-                            <tbody class="bg-white">
+                            <!-- TABLE BODY -->
+                            <tbody class="bg-white font-semibold tracking-wider">
                                 @foreach ($perusahaan as $group)
                                 <tr >
-                                    <td class="px-6 py-4 border-b border-gray-200 text-sm whitespace-nowrap" colspan="10">
+                                    <td class="px-6 py-4  border-gray-200 text-sm whitespace-nowrap bg-table-color" colspan="10">
                                         <h2>{{ $group['nama_perusahaan'] }}</h2>
                                     </td>
                                 </tr>
@@ -138,6 +140,9 @@
                                             <td class="px-6 py-4 border-b border-gray-200 text-sm whitespace-nowrap">
                                                 {{ $pengajuan->tanggal_mulai }}
                                             </td>
+                                            
+                                        
+                                            
                                             <td class="px-6 py-4 border-b border-gray-200 text-sm whitespace-nowrap">
                                                 <div class="flex items-center justify-start">
                                                     @if (Auth::user()->role == 'admin')
