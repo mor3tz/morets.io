@@ -107,7 +107,7 @@
                                 </tr>
                             </thead>
                             <!-- TABLE BODY -->
-                            <tbody class="bg-white font-semibold tracking-wider">
+                            <tbody class="bg-white font-semibold tracking-wider sticky">
                                 @foreach ($perusahaan as $group)
                                 <tr >
                                     <td class="px-6 py-4  border-gray-200 text-sm whitespace-nowrap bg-table-color" colspan="10">
@@ -229,6 +229,9 @@
                                                 </div>
                                                 
                                                 @endif
+
+                                                
+
                                             </td>
                                             @endif
 
@@ -314,10 +317,13 @@
                                 @endforeach
                                 
                                 <!-- Additional rows can be added here -->
+                                        
+
                             </tbody>
                         </table>
                     </div>
 
+                    
                 </div>
             </div>
         </div>

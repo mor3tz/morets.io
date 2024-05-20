@@ -12,24 +12,24 @@
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-10 sm:-my-px sm:ml-10 sm:flex ">
-                    <x-nav-link :href="route('home')" :active="request()->routeIs('home')" class="font-bold">
+                    <x-nav-link :href="route('home')" :active="request()->routeIs('home')" class="font-bold tracking-widest">
                         {{ __('Home') }}
                     </x-nav-link>
 
-                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')" class="font-bold">
+                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')" class="font-bold tracking-widest">
                             {{ __('Dashboard') }}
                     </x-nav-link>
                     @if (Auth::user()->role == 'user' || Auth::user()->role == 'admin') 
-                    <x-nav-link :href="route('pengajuan')" :active="request()->routeIs('pengajuan')" class="font-bold">
+                    <x-nav-link :href="route('pengajuan')" :active="request()->routeIs('pengajuan')" class="font-bold tracking-widest">
                         {{ __('Pengajuan') }}
                     </x-nav-link>
                     @endif
 
-                    <x-nav-link :href="route('contact')" :active="request()->routeIs('contact')" class="font-bold">
+                    <x-nav-link :href="route('contact')" :active="request()->routeIs('contact')" class="font-bold tracking-widest">
                         {{ __('Contact') }}
                     </x-nav-link>
                     @if (Auth::user()->role == 'admin')
-                    <x-nav-link :href="route('user.index')" :active="request()->routeIs('user.index')" class="font-bold">
+                    <x-nav-link :href="route('user.index')" :active="request()->routeIs('user.index')" class="font-bold tracking-widest">
                         {{ __('User') }}
                     </x-nav-link>
                     @endif
