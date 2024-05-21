@@ -44,18 +44,34 @@
                 background-position: center;
             }
         }
+
+        /* Styling  for slightly wider card */
+        .half-width-card {
+            width: 60%;
+            max-width: 500px;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+            backdrop-filter: blur(5px);
+            background-color: rgba(255,255,255,0.5);
+            max-height: 80vh;
+            overflow-y: hidden;
+        }
+
     </style>
 </head>
 <body class="font-sans text-gray-900 antialiased overflow-hidden">
     <div class="flex items-center justify-center min-h-screen bg-cover bg-no-repeat bg-custom">
         <!-- Main content area that should be centered -->
-        <div class="w-full max-w-md p-6 space-y-4 shadow-lg" style="backdrop-filter: blur(5px); background-color: rgba(255, 255, 255, 0.5);">
-            <div class="w-full">
-                <img src="{{ asset('img/logodasarpkt.png') }}" alt="Logo" class="mx-auto">
+            <div class="half-width-card p-6 space-y4 shadow-w-lg">
+
+                <div class="w-full">
+                    <img src="{{ asset('img/logodasarpkt.png') }}" alt="Logo" class="mx-auto">
+                </div>
+                
+                <!-- Slot for additional content -->
+                {{ $slot }}
             </div>
-            
-            <!-- Slot for additional content -->
-            {{ $slot }}
         </div>
     </div>
 </body>

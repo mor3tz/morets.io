@@ -13,9 +13,9 @@
             <div class="bg-white rounded-lg overflow-hidden shadow-xl">
                 <!-- Profile header -->
 
-                <div class="bg-gradient-to-r from-blue-500 to-blue-700 px-4 py-5 sm:px-6">
-                    <h3 class="text-bold leading-6 font-medium text-lg text-black text-center">
-                        Informasi Pemohon
+                <div class="bg-gray-800 px-4 py-5 sm:px-6">
+                    <h3 class="text-bold leading-6 font-medium text-lg text-white text-center">
+                        INFORMASI PEMOHON
                     </h3>
                 </div>
 
@@ -87,9 +87,9 @@
             <!-- Document photos card -->
             <div class="bg-white rounded-lg overflow-hidden shadow-xl mt-6">
                 <!-- Document photos header -->
-                <div class="bg-gradient-to-r from-blue-500 to-blue-700 px-4 py-5 sm:px-6">
-                    <h3 class="text-bold leading-6 font-medium text-lg text-black text-center">
-                        Document
+                <div class="bg-gray-800 px-4 py-5 sm:px-6">
+                    <h3 class="text-bold leading-6 font-medium text-lg text-white text-center">
+                        DOCUMENT
                     </h3>
                 </div>
 
