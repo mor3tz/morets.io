@@ -72,54 +72,99 @@
                     <div class="mt-4 overflow-x-auto">
                         <table class="min-w-full table-auto">
                             <!-- TABLE HEAD -->
-                            <thead>
-                        <tr>
-                            @if (Auth::user()->role != 'admin' && Auth::user()->role != 'user')
-                                <th class="px-6 py-3 border-b border-gray-200 text-gray-800 text-left text-xs font-semibold uppercase tracking-wider">
-                                    <!-- Kolom Kosong untuk Checkbox -->
-                                </th>
-                            @endif
-                            <th class="px-6 py-3 border-b border-gray-200 text-gray-800 text-left text-xs font-semibold uppercase tracking-wider">
-                                Nama Perusahaan
-                            </th>
-                            <th class="px-6 py-3 border-b border-gray-200 text-gray-800 text-left text-xs font-semibold uppercase tracking-wider">
-                                Status
-                            </th>
-                            <th class="px-6 py-3 border-b border-gray-200 text-gray-800 text-left text-xs font-semibold uppercase tracking-wider">
-                                Actions
-                            </th>
-                        </tr>
+                            <thead class=" ">
+                                <tr>
+                                    @if (Auth::user()->role != 'admin' && Auth::user()->role != 'user')
+                                        <th class="px-6 py-3 border-b border-gray-200 text-gray-800 text-left text-xs font-semibold uppercase tracking-wider">
 
+                                        </th>
+                                    @endif
+                                    <th class="px-6 py-3 border-b border-gray-200 text-gray-800 text-left text-xs font-semibold uppercase tracking-wider">
+                                        No
+                                    </th>
+                                    <th class="px-6 py-3 border-b border-gray-200 text-gray-800 text-left text-xs font-semibold uppercase tracking-wider">
+                                        Nama
+                                    </th>
+                                    <th class="px-6 py-3 border-b border-gray-200 text-gray-800 text-left text-xs font-semibold uppercase tracking-wider">
+                                        Unit Kerja
+                                    </th>
+                                    <th class="px-6 py-3 border-b border-gray-200 text-gray-800 text-left text-xs font-semibold uppercase tracking-wider">
+                                        Nama Perusahaan
+                                    </th>
+                                    <th class="px-6 py-3 border-b border-gray-200 text-gray-800 text-left text-xs font-semibold uppercase tracking-wider">
+                                        Area
+                                    </th>
+                                    <th class="px-6 py-3 border-b border-gray-200 text-gray-800 text-left text-xs font-semibold uppercase tracking-wider">
+                                        No KTP
+                                    </th>
+                                    <th class="px-6 py-3 border-b border-gray-200 text-gray-800 text-left text-xs font-semibold uppercase tracking-wider">
+                                        Berapa Lama Bekerja
+                                    </th>
+                                    <th class="px-6 py-3 border-b border-gray-200 text-gray-800 text-left text-xs font-semibold uppercase tracking-wider">
+                                        Tanggal Mulai Bekerja
+                                    </th>
+                                    <th class="px-6 py-3 border-b border-gray-200 text-gray-800 text-left text-xs font-semibold uppercase tracking-wider">
+                                        Status
+                                    </th>
+                                    <th class="px-6 py-3 border-b border-gray-200 text-gray-800 text-left text-xs font-semibold uppercase tracking-wider">
+                                        Actions
+                                    </th>
+                                </tr>
                             </thead>
                             <!-- TABLE BODY -->
                             <tbody class="bg-white font-semibold tracking-wider sticky">
-                                @if (Auth::user()->role != 'admmin' && Auth::user()->role != 'user')
+                                @if (Auth::user()->role != 'admin' && Auth::user()->role != 'user')
                                     <form action="{{ route('pengajuan.manyApprove') }}" method="POST">
                                         @csrf
                                 @endif
                                         @foreach ($perusahaan as $group)
-                                        <tr>
-                                            <td class="px-6 py-4 border-gray-200 text-sm whitespace-nowrap bg-table-color" colspan="12">
-                                                <h2>{{ $loop->iteration }}. {{ $group['nama_perusahaan'] }}</h2>
-                                            </td>
-                                        </tr>
-                                        
+                                            <tr >
+                                                <td class="px-6 py-4  border-gray-200 text-sm whitespace-nowrap bg-table-color" colspan="12">
+                                                    <h2>{{ $group['nama_perusahaan'] }}</h2>
+                                                </td>
+                                            
+                                            </tr>
                                             @foreach ($group['pengajuans'] as $pengajuan)
                                                 <tr>
-                                                    @if (Auth::user()->role != 'admmin' && Auth::user()->role != 'user')
+                                                    @if (Auth::user()->role != 'admin' && Auth::user()->role != 'user')
                                                         <td class="px-6 py-4 border-b border-gray-200 text-sm whitespace-nowrap">
                                                             <div class="flex items-center">
                                                                 @if ($pengajuan->approved || $pengajuan->rejected)
-                                                                <input id="" type="checkbox" name="pengajuans[]" value="" class="w-4 h-4 text-orange bg-gray-100 border-gray-300 rounded focus:ring-orange" disabled>
-                                                            @else
-                                                                <input id="{{ $pengajuan->id }}" type="checkbox" name="pengajuans[]" value="{{ $pengajuan->id }}" class="w-4 h-4 text-orange bg-gray-100 border-gray-300 rounded focus:ring-orange">
-                                                            @endif
-                                                            <label for="{{ $pengajuan->id }}" class="sr-only">checkbox</label>
-                                                        </div>
+                                                                    <input id="" type="checkbox" name="pengajuans[]" value="" class="w-4 h-4 text-orange bg-gray-100 border-gray-300 rounded focus:ring-orange " disabled>
+                                                                @else
+                                                                    <input id="{{ $pengajuan->id }}" type="checkbox" name="pengajuans[]" value="{{ $pengajuan->id }}" class="w-4 h-4 text-orange bg-gray-100 border-gray-300 rounded focus:ring-orange ">
+                                                                @endif
+                                                                <label for="{{ $pengajuan->id }}" class="sr-only">checkbox</label>
+                                                            </div>
+                                                        </td>
+                                                    @endif  
+                                                    <td class="px-6 py-4 border-b border-gray-200 text-sm whitespace-nowrap">
+                                                        {{ $loop->iteration }}
                                                     </td>
-                                                @endif 
- 
-                                                  
+                                                    <td class="px-6 py-4 border-b border-gray-200 text-sm whitespace-nowrap">
+                                                        {{ $pengajuan->nama }}
+                                                    </td>
+                                                    <td class="px-6 py-4 border-b border-gray-200 text-sm whitespace-nowrap">
+                                                        {{ $pengajuan->unit_kerja }}
+                                                    </td>
+                                                    <td class="px-6 py-4 border-b border-gray-200 text-sm whitespace-nowrap">
+                                                        {{ $pengajuan->nama_perusahaan }}
+                                                    </td>
+                                                    <td class="px-6 py-4 border-b border-gray-200 text-sm whitespace-nowrap">
+                                                        {{ $pengajuan->area }}
+                                                    </td>
+                                                    <td class="px-6 py-4 border-b border-gray-200 text-sm whitespace-nowrap">
+                                                        {{ $pengajuan->no_ktp }}
+                                                    </td>
+                                                    <td class="px-6 py-4 border-b border-gray-200 text-sm whitespace-nowrap">
+                                                        {{ $pengajuan->lama_bekerja }}
+                                                    </td>
+                                                    <td class="px-6 py-4 border-b border-gray-200 text-sm whitespace-nowrap">
+                                                        {{ $pengajuan->tanggal_mulai }}
+                                                    </td>
+                                                    
+                                                
+                                                    
                                                     <td class="px-6 py-4 border-b border-gray-200 text-sm whitespace-nowrap">
                                                         <div class="flex items-center justify-start">
                                                             @if (Auth::user()->role == 'admin')
@@ -164,55 +209,46 @@
                                                         </div>
                                                     </td>
                                                     @if (Auth::user()->role != 'user')
-                                                    <td class="px-6 py-5 border-b border-gray-200 text-sm whitespace-nowrap">
-                                                        <div><a href="{{ route('pengajuan.show', ['id' => $pengajuan->id]) }}"
-                                                            class="text-blue-500 hover:text-blue-600"> Detail</a></div>
+                                                        <td class="px-6 py-5 border-b border-gray-200 text-sm whitespace-nowrap">
+                                                            <div><a href="{{ route('pengajuan.show', ['id' => $pengajuan->id]) }}"
+                                                                class="text-blue-500 hover:text-blue-600"> Detail</a></div>
+                                                            @if (Auth::user()->role == 'admin')
+                                                                    {{-- delete_button --}}
+                                                                    <button data-modal-target="delete_modal{{ $pengajuan->id }}" data-modal-toggle="delete_modal{{ $pengajuan->id }}" class="text-red-500 hover:text-red-600" type="button">
+                                                                        Delete
+                                                                    </button>
+                                                                    
+                                                            @endif            
+                                                        </td>
                                                         @if (Auth::user()->role == 'admin')
-                                                        <div>
-                                                            {{-- delete_button --}}
-                                                            <button data-modal-target="delete_modal{{ $pengajuan->id }}" data-modal-toggle="delete_modal{{ $pengajuan->id }}" class="text-red-500 hover:text-red-600" type="button">
-                                                                Delete
-                                                            </button>
-                                                            
-
-
-                                                            
-                                                            {{-- delete modal --}}
                                                             <div id="delete_modal{{ $pengajuan->id }}" tabindex="-1" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
                                                                 <div class="relative p-4 w-full max-w-md max-h-full">
                                                                     <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
-                                                                        <button type="button" class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="delete_modal{{ $pengajuan->id }}" aria-label="Close modal">
+                                                                        <button type="button" class="absolute top-3 end-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="delete_modal{{ $pengajuan->id }}">
                                                                             <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
                                                                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
                                                                             </svg>
+                                                                            <span class="sr-only">Close modal</span>
                                                                         </button>
                                                                         <div class="p-4 md:p-5 text-center">
                                                                             <form action="{{ route('pengajuan.delete', $pengajuan->id) }}" method="POST" style="display: inline;">
                                                                                 @csrf
                                                                                 @method('DELETE')
                                                                                 <input type="hidden" name="approval_status" value="approved">
-                                                            
                                                                                 <svg class="mx-auto mb-4 text-gray-400 w-12 h-12 dark:text-gray-200" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
                                                                                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
                                                                                 </svg>
-                                                                                <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">Are you sure you want to delete this applicant?</h3>
-                                                                                <button data-modal-hide="delete_modal{{ $pengajuan->id }}" type="submit" class="text-white bg-sky-500 hover:bg-sky-200 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center">
+                                                                                <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">Are you sure you want to delete this aplicant</h3>
+                                                                                <button data-modal-hide="delete_modal{{ $pengajuan->id }}" type="submit" class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center">
                                                                                     Yes, I'm sure
                                                                                 </button>
-                                                                                <button data-modal-hide="delete_modal{{ $pengajuan->id }}" type="button" class="py-2.5 px-5 ml-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">No, cancel</button>
+                                                                                <button data-modal-hide="delete_modal{{ $pengajuan->id }}" type="button" class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">No, cancel</button>
                                                                             </form>
                                                                         </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                            
-                                                        </div>
-                                                        
                                                         @endif
-
-                                                        
-
-                                                    </td>
                                                     @endif
 
 
@@ -296,7 +332,7 @@
                                             @endforeach
                                         @endforeach
 
-                                @if (Auth::user()->role != 'admmin' && Auth::user()->role != 'user')
+                                @if (Auth::user()->role != 'admin' && Auth::user()->role != 'user')
                                         <tr>
                                             <td colspan="12">
                                                 <button id="submitSelection" class="bg-orange text-white px-4 py-2 rounded mt-5" type="submit">Many Approve</button>
