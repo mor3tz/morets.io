@@ -236,6 +236,9 @@ class PengajuanController extends Controller
 
     public function manyApprove(Request $request){
         $user = Auth::user();
+        if($request->pengajuans == null){
+            return redirect()->back()->with(['errors' => 'Pengajuan belum dipilih!']);
+        }
         foreach($request->pengajuans as $id){
             $pengajuan = Pengajuan::findOrFail($id);
             if(!$pengajuan->approvals()->where('approver_role', $user->role )->where('approval_status', 'approved')->exists()){     
