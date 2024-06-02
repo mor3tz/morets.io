@@ -35,7 +35,7 @@
                         <option value="vp">VP</option>
                         <option value="avp">AVP</option>
                         <option value="svp_operation">SVP Operation</option>
-                        <option value="svp_security">VP Security</option>
+                        <option value="vp_security">VP Security</option>
                     </select>
                     <x-input-error :messages="$errors->get('role')" class="mt-2" />
                 </div>

@@ -17,7 +17,6 @@ class PengajuanController extends Controller
     {
         $user = Auth::user();
         $pengajuans = collect(); // Default inisialisasi sebagai koleksi kosong
-    
         switch ($user->role) {
             case 'admin':
             case 'kabag':
@@ -47,7 +46,7 @@ class PengajuanController extends Controller
                 })->orderBy('created_at', 'desc')->get();
                 break;
         }
-    
+
         // Proses pengajuans untuk menambahkan status tambahan
         $pengajuans->each(function ($pengajuan) use ($user) {
             if ($user->role == 'user') {
@@ -76,7 +75,7 @@ class PengajuanController extends Controller
                 }
             }
         });
-    
+
         // Kelompokkan pengajuans berdasarkan nama_perusahaan
         $pengajuansByPerusahaan = $pengajuans->groupBy('nama_perusahaan');
         $pengajuansByPerusahaan = $pengajuans->groupBy(function($item) {
@@ -90,10 +89,10 @@ class PengajuanController extends Controller
                 'pengajuans' => $items
             ];
         });
-    
+
         return view('dashboard', ['perusahaan' => $perusahaan]);
     }
-    
+
 
     /**
      * Show the form for creating a new resource.
@@ -155,19 +154,19 @@ class PengajuanController extends Controller
      * Display the specified resource.
      */
     public function show(string $id)
-    {   
+    {
         $user = Auth::user();
         $pengajuan = Pengajuan::find($id);
         $latestApproval = $pengajuan->approvals()->latest()->first();
 
-        if($latestApproval){            
+        if($latestApproval){
             if ($latestApproval->role != "svp_operation" && $latestApproval->role != "vp_security") {
                 $pengajuan->latest_status = $latestApproval->approval_status . ' by ' . $latestApproval->user->name;
                 $pengajuan->latest_status_color = $latestApproval->approval_status === 'approved' ? 'lime' : ($latestApproval->approval_status === 'rejected' ? 'red' : 'yellow');
             }
         }
 
-        
+
         if (!$pengajuan) {
             return redirect()->back();
         }
@@ -241,7 +240,7 @@ class PengajuanController extends Controller
         }
         foreach($request->pengajuans as $id){
             $pengajuan = Pengajuan::findOrFail($id);
-            if(!$pengajuan->approvals()->where('approver_role', $user->role )->where('approval_status', 'approved')->exists()){     
+            if(!$pengajuan->approvals()->where('approver_role', $user->role )->where('approval_status', 'approved')->exists()){
                 Approval::create([
                     'pengajuan_id' => $pengajuan->id,
                     'approver_id' => $user->id,
