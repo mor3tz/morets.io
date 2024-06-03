@@ -9,10 +9,10 @@
     <div class="bg-gray-100 py-8 px-4 md:px-6 lg:px-10 pt-3">
         <div class="max-w-3xl mx-auto">
 
+            
             <!-- Card for personal information -->
             <div class="bg-white rounded-lg overflow-hidden shadow-xl">
                 <!-- Profile header -->
-
                 <div class="bg-gray-800 px-4 py-5 sm:px-6">
                     <h3 class="text-bold leading-6 font-medium text-lg text-white text-center">
                         INFORMASI PEMOHON
@@ -107,23 +107,27 @@
                     </div>
                 </div>   
             </div>
-
-            {{-- modal button --}}
-            @if(Auth::user()->role != 'admin' &&  Auth::user()->role != 'user')
-                @if (!$pengajuan->approvals->contains('approver_role', Auth::user()->role))
-                    <div class="flex justify-end gap-3">
-                        {{-- reject_button --}}
-                        <button data-modal-target="reject_modal" data-modal-toggle="reject_modal" class="block mt-5 text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800" type="button">
-                            reject
-                        </button>
-
-                        {{-- approve_button --}}
-                        <button data-modal-target="approve_modal" data-modal-toggle="approve_modal" class="block mt-5 text-white bg-lime-600 hover:bg-lime-700 focus:ring-4 focus:outline-none focus:ring-lime-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-lime-600 dark:hover:bg-lime-700 dark:focus:ring-lime-800" type="button">
-                            Approve
-                        </button>
-                    </div>
-                @endif
-            @endif
+            <div class="flex justify-between">
+                <div>
+                    <a href="{{ route('perusahaan', ['perusahaan' => $pengajuan->nama_perusahaan]) }}" class="mt-5 px-3 py-2 text-sm font-medium text-center inline-flex items-center text-white bg-blue-500 rounded-lg hover:bg-blue-600 focus:ring-4 focus:outline-none focus:ring-blue-300"><i class="fas fa-arrow-left mr-2"></i>Back</a>
+                </div>
+                {{-- modal button --}}
+                <div class="flex justify-end gap-3">
+                @if(Auth::user()->role != 'admin' &&  Auth::user()->role != 'user')
+                    @if (!$pengajuan->approvals->contains('approver_role', Auth::user()->role))
+                            {{-- reject_button --}}
+                            <button data-modal-target="reject_modal" data-modal-toggle="reject_modal" class="block mt-5 text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800" type="button">
+                                reject
+                            </button>
+    
+                            {{-- approve_button --}}
+                            <button data-modal-target="approve_modal" data-modal-toggle="approve_modal" class="block mt-5 text-white bg-lime-600 hover:bg-lime-700 focus:ring-4 focus:outline-none focus:ring-lime-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-lime-600 dark:hover:bg-lime-700 dark:focus:ring-lime-800" type="button">
+                                Approve
+                            </button>
+                            @endif
+                            @endif
+                </div>
+            </div>
 
             
             

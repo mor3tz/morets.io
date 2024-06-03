@@ -14,6 +14,7 @@ Route::middleware('auth')->group(function () {
     return view('home');
     })->middleware(['auth', 'verified'])->name('home');
     route::get('/dashboard',[PengajuanController::class, 'index'])->name('dashboard');
+    route::get('/dashboard/{perusahaan}',[PengajuanController::class, 'perusahaan'])->middleware(['role:admin,kabag,vp,avp,svp_operation,vp_security'])->name('perusahaan');
     Route::get('/contact', function () {
         return view('contact');
     })->name('contact');

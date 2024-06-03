@@ -1,5 +1,6 @@
 <div>
     <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+        @if (Auth::user()->role != 'user')    
         <div class="flex flex-column sm:flex-row flex-wrap space-y-4 sm:space-y-0 items-center justify-between pb-4">
             <label for="table-search" class="sr-only">Search</label>
             <div class="relative">
@@ -9,6 +10,7 @@
                 <input wire:model.live.debounce300ms="search" type="text" id="table-search" class="block p-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search for items">
             </div>
         </div>
+        @endif
         <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
             <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                 @if (Auth::user()->role == 'user')
@@ -68,19 +70,31 @@
                                 {{ $pengajuan->tanggal_mulai }}
                             </td>
                             <td class="px-6 py-4">
-                                {{ $pengajuan->status }}
+                                @if ($pengajuan->status == 'approved')
+                                <span class="bg-lime-300 text-black px-2 py-1 rounded">
+                                    Approved
+                                </span>
+                                @elseif ($pengajuan->status == 'rejected')
+                                <span class="bg-red-300 text-black px-2 py-1 rounded">
+                                    Rejected
+                                </span>
+                                @else
+                                <span class="bg-yellow-300 text-black px-2 py-1 rounded">
+                                    Pending
+                                </span>
+                                @endif
                             </td>
                             <!-- modal progress -->
                            
                                 <!-- Modal toggle -->
                                 <td class="px-6 py-4 ">
-                                    <button data-modal-target="dtail{{ $pengajuan->id }}" data-modal-toggle="dtail{{ $pengajuan->id }}" class="block text-blue-500 hover:text-blue-600   font-medium  text-sm text-center " type="button">
+                                    <button data-modal-target="dtail{{ $loop->iteration }}" data-modal-toggle="dtail{{ $loop->iteration }}" class="block text-blue-500 hover:text-blue-600   font-medium  text-sm text-center " type="button">
                                         Progress
                                     </button>
                                 </td>
                                 
                                 <!-- modal progress -->
-                                <div id="dtail{{ $pengajuan->id }}" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+                                <div id="dtail{{ $loop->iteration }}" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
                                     <div class="relative p-4 w-full max-w-md max-h-full">
                                         <!-- Modal content -->
                                         <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
@@ -92,7 +106,7 @@
                                                     <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
                                                     {{ $pengajuan->nama }}
                                                     </h3>
-                                                    <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm h-8 w-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-toggle="dtail{{ $pengajuan->id }}">
+                                                    <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm h-8 w-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-toggle="dtail{{ $loop->iteration }}">
                                                         <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
                                                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
                                                         </svg>
@@ -157,7 +171,8 @@
                             status
                         </td>
                         <td class="px-6 py-4">
-                            button dtail
+                            <div><a href="{{ route('perusahaan', ['perusahaan' => $pengajuan]) }}"
+                                class="text-blue-500 hover:text-blue-600"> Detail</a></div>
                         </td>
                     </tr>
                 @endforeach
@@ -168,4 +183,3 @@
     </div>
    
 </div>
-

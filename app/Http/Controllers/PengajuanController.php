@@ -15,91 +15,17 @@ class PengajuanController extends Controller
      */
     public function index()
     {
-        $user = Auth::user();
-        $pengajuans = collect(); // Default inisialisasi sebagai koleksi kosong
-        switch ($user->role) {
-            case 'admin':
-            case 'kabag':
-                $pengajuans = Pengajuan::orderBy('created_at', 'desc')->get();
-                break;
-            case 'user':
-                $pengajuans = Pengajuan::where('user_id', $user->id)->orderBy('created_at', 'desc')->get();
-                break;
-            case 'vp':
-                $pengajuans = Pengajuan::whereHas('approvals', function ($query) {
-                    $query->where('approver_role', 'kabag')->where('approval_status', 'approved');
-                })->orderBy('created_at', 'desc')->get();
-                break;
-            case 'avp':
-                $pengajuans = Pengajuan::whereHas('approvals', function ($query) {
-                    $query->where('approver_role', 'vp')->where('approval_status', 'approved');
-                })->orderBy('created_at', 'desc')->get();
-                break;
-            case 'svp_operation':
-                $pengajuans = Pengajuan::where('area', 'pabrik')->whereHas('approvals', function ($query) {
-                    $query->where('approver_role', 'avp')->where('approval_status', 'approved');
-                })->orderBy('created_at', 'desc')->get();
-                break;
-            case 'vp_security':
-                $pengajuans = Pengajuan::where('area', 'kantor')->whereHas('approvals', function ($query) {
-                    $query->where('approver_role', 'avp')->where('approval_status', 'approved');
-                })->orderBy('created_at', 'desc')->get();
-                break;
-        }
-
-        // Proses pengajuans untuk menambahkan status tambahan
-        $pengajuans->each(function ($pengajuan) use ($user) {
-            if ($user->role == 'user') {
-                $pengajuan->rejected = $pengajuan->approvals()
-                                                ->where('approval_status', 'rejected')
-                                                ->exists();
-                $pengajuan->approved_by_svp = $pengajuan->approvals()
-                                                        ->where('approval_status', 'approved')
-                                                        ->whereIn('approver_role', ['svp_operation', 'vp_security'])
-                                                        ->exists();
-            } else {
-                $pengajuan->approved = $pengajuan->approvals()
-                                                ->where('approver_role', $user->role)
-                                                ->where('approval_status', 'approved')
-                                                ->exists();
-                $pengajuan->rejected = $pengajuan->approvals()
-                                                ->where('approver_role', $user->role)
-                                                ->where('approval_status', 'rejected')
-                                                ->exists();
-                if ($user->role == 'admin') {
-                    $latestApproval = $pengajuan->approvals()->latest()->first();
-                    if ($latestApproval) {
-                        $pengajuan->latest_status = $latestApproval->approval_status . ' by ' . $latestApproval->user->name;
-                        $pengajuan->latest_status_color = $latestApproval->approval_status === 'approved' ? 'lime' : ($latestApproval->approval_status === 'rejected' ? 'red' : 'yellow');
-                    }
-                }
-            }
-        });
-
-        // Kelompokkan pengajuans berdasarkan nama_perusahaan
-        $pengajuansByPerusahaan = $pengajuans->groupBy('nama_perusahaan');
-        $pengajuansByPerusahaan = $pengajuans->groupBy(function($item) {
-            return strtoupper($item->nama_perusahaan);
-        });
-
-        // Struktur data yang diinginkan
-        $perusahaan = $pengajuansByPerusahaan->map(function ($items, $key) {
-            return [
-                'nama_perusahaan' => $key,
-                'pengajuans' => $items
-            ];
-        });
-
-        return view('dashboard', ['perusahaan' => $perusahaan]);
+        return view('dashboard');
     }
 
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
-    {
-        //
+    public function perusahaan($perusahaan)
+    {   
+       
+        return view('perusahaan', compact('perusahaan'));
     }
 
     /**
@@ -229,7 +155,7 @@ class PengajuanController extends Controller
         }
 
 
-        return redirect()->route('dashboard')->with(['sukses'=> 'Pengajuan telah ' . $request->approval_status]);
+        return redirect()->route('perusahaan', ['perusahaan' => $pengajuan->nama_perusahaan])->with(['sukses'=> 'Pengajuan telah ' . $request->approval_status]);
     }
 
 

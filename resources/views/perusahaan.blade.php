@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-white text-xl leading-tight flex justify-between items-center">
-            {{ __('DASHBOARD') }}
+            {{ $perusahaan }}
             <div class="text-right text-sm">
                 {{ __('FUTURE IS OURS') }}
             </div>
@@ -12,18 +12,10 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg min-h-[600px]">
                 <div class="p-6 text-gray-600">
-                    {{ __(" Dashboard Pengajuan Badge") }}
-
-                    <!-- Button for creating new file -->
                     <div class="flex justify-between">
-                        @if (Auth::user()->role == 'admin')
-                            <div class="mt-4  space-x-4">
-                                <a href="{{ route('pengajuan') }}" class="px-4 py-2 bg-green text-white font-bold text-xs uppercase rounded hover:bg-orange transition duration-300 ease-in-out">
-                                    + Pengajuan Baru
-                                </a>
-                            </div>
-                        @endif
-
+                        <div class="mt-4  space-x-4">
+                            <a href="{{ route('dashboard') }}" class="px-3 py-2 text-sm font-medium text-center inline-flex items-center text-white bg-blue-500 rounded-lg hover:bg-blue-600 focus:ring-4 focus:outline-none focus:ring-blue-300"><i class="fas fa-arrow-left mr-2"></i> Back</a>
+                        </div>
                         <!-- toast -->
                         @if (session('sukses'))
                             {{-- <div class="w-1/2 bg-green flex flex-col items-center font-bold text-gray-200 rounded-md my-3 py-3 mx-auto">
@@ -66,11 +58,9 @@
                         @endif
                     </div>
 
-
-
                     <!-- Data Table -->
                     <div class="mt-4 overflow-x-auto">
-                       @livewire('perusahaan-list')
+                       @livewire('pengajuan-list', ['perusahaan' => $perusahaan])
                     </div>
                 </div>
             </div>
