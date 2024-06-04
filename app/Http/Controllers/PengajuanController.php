@@ -159,10 +159,10 @@ class PengajuanController extends Controller
     }
 
 
-    public function manyApprove(Request $request){
+    public function manyApprove(Request $request, $nama_perusahaan){
         $user = Auth::user();
         if($request->pengajuans == null){
-            return redirect()->back()->with(['errors' => 'Pengajuan belum dipilih!']);
+            return redirect()->route('perusahaan', ['perusahaan' => $nama_perusahaan])->with(['error' => 'Pengajuan belum dipilih!']);
         }
         foreach($request->pengajuans as $id){
             $pengajuan = Pengajuan::findOrFail($id);
@@ -177,14 +177,15 @@ class PengajuanController extends Controller
             }
 
         }
-        return redirect()->route('dashboard')->with(['sukses'=> 'Pengajuan telah diapprove']);
+        return redirect()->route('perusahaan', ['perusahaan' => $nama_perusahaan])->with(['sukses'=> 'Pengajuan telah diapprove']);
 
     }
 
     public function delete($id){
         $pengajuan = Pengajuan::findOrFail($id);
+        $nama_perusahaan = $pengajuan->nama_perusahaan;
         $pengajuan->approvals()->delete();
         $pengajuan->delete();
-        return redirect()->back()->with(['sukses'=> 'Pengajuan telah dihapus']);
+        return redirect()->route('perusahaan', ['perusahaan' => $nama_perusahaan])->with(['sukses'=> 'Pengajuan telah dihapus']);
     }
 }

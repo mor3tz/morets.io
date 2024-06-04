@@ -168,7 +168,7 @@
                            {{ $pengajuan }}
                         </td>
                         <td class="px-6 py-4">
-                            status
+                            status (belum)
                         </td>
                         <td class="px-6 py-4">
                             <div><a href="{{ route('perusahaan', ['perusahaan' => $pengajuan]) }}"

@@ -4,7 +4,6 @@ namespace App\Livewire;
 
 use App\Models\Pengajuan;
 use Illuminate\Support\Facades\Auth;
-use Laravel\Prompts\SearchPrompt;
 use Livewire\Component;
 
 class PengajuanList extends Component
@@ -69,6 +68,6 @@ class PengajuanList extends Component
                                                 ->exists();
             });
         }
-        return view('livewire.pengajuan-list' , ['pengajuan' => $pengajuan]);
+        return view('livewire.pengajuan-list' , ['pengajuan' => $pengajuan, 'perusahaan'=> $this->perusahaan]);
     }
 }
