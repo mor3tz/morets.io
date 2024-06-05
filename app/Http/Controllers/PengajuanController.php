@@ -174,6 +174,10 @@ class PengajuanController extends Controller
                     'approval_status' => 'approved',
                     'approval_date' => now(),
                 ]);
+                if( $user->role == 'svp_operation' || $user->role == 'vp_security'){
+                    $pengajuan->status = 'approved';
+                    $pengajuan->save();
+                }
             }
 
         }

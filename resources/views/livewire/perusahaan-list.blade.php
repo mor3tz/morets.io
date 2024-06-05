@@ -1,3 +1,7 @@
+@php
+use Carbon\Carbon;
+@endphp
+
 <div>
     <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
         @if (Auth::user()->role != 'user')    
@@ -30,6 +34,9 @@
                 <tr>
                     <th scope="col" class="px-6 py-3">
                         Nama Perusahaan
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        Tanggal Pengajuan Terakhir
                     </th>
                     <th scope="col" class="px-6 py-3">
                         Status
@@ -165,13 +172,28 @@
                 @foreach ($pengajuans as $pengajuan)
                     <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                         <td class="px-6 py-4">
-                           {{ $pengajuan }}
+                            {{ $pengajuan['nama_perusahaan'] }}
                         </td>
                         <td class="px-6 py-4">
-                            status (belum)
+                            {{ Carbon::parse($pengajuan['latest_created_at'])->format('d M Y H:i') }}
                         </td>
                         <td class="px-6 py-4">
-                            <div><a href="{{ route('perusahaan', ['perusahaan' => $pengajuan]) }}"
+                            @if ($pengajuan['status'] == 'approved')
+                                <span class="bg-lime-300 text-black px-2 py-1 rounded">
+                                    All Approved
+                                </span>
+                            @elseif($pengajuan['status'] == 'rejected')
+                                <span class="bg-red-300 text-black px-2 py-1 rounded">
+                                    Someone Rejected
+                                </span>
+                            @else
+                                <span class="bg-yellow-300 text-black px-2 py-1 rounded">
+                                    Pending
+                                </span>
+                            @endif
+                        </td>
+                        <td class="px-6 py-4">
+                            <div><a href="{{ route('perusahaan', ['perusahaan' => $pengajuan['nama_perusahaan']]) }}"
                                 class="text-blue-500 hover:text-blue-600"> Detail</a></div>
                         </td>
                     </tr>

@@ -29,9 +29,13 @@ class PengajuanList extends Component
                 });
                 break;
             case 'svp_operation':
+                $query->whereHas('approvals', function ($query) {
+                    $query->where('approver_role', 'avp')->where('approval_status', 'approved')->where('area','pabrik');
+                });
+                break;
             case 'vp_security':
                 $query->whereHas('approvals', function ($query) {
-                    $query->where('approver_role', 'avp')->where('approval_status', 'approved');
+                    $query->where('approver_role', 'avp')->where('approval_status', 'approved')->where('area','kantor');
                 });
                 break;
         }
