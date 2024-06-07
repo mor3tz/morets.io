@@ -13,8 +13,8 @@
             <form action="{{ route('pengajuan.store') }}" method="POST" enctype="multipart/form-data" class="max-w-3xl mx-auto">
                 @csrf
                 <div class="border-b border-gray-900/10 pb-12 py-10">
-                    <h2 class="text-base font-semibold leading-7 text-gray-900 text-center">PERSONAL INFORMATION</h2>
-                    <p class="mt-1 text-sm leading-6 text-gray-600 text-center">Silahkan Melengkapi Data Diri Anda.</p>
+                    <h2 class="text-base font-bold leading-7 text-gray-900 text-center">PERSONAL INFORMATION</h2>
+                    <p class="mt-1 text-base font-semibold leading-6 text-gray-600 text-center">Silahkan Melengkapi Data Diri Anda.</p>
                 
                     <div class="mt-10 grid grid-cols-1 gap-y-8 sm:grid-cols-1 sm:gap-x-6">
                         <div>
@@ -95,7 +95,7 @@
                 </div>
         
                 <div class="mt-6 flex justify-end">
-                    <button type="button" class="rounded-md px-5 py-3 shadow-sm text-sm font-semibold leading-6 text-gray-900 hover:bg-red-700" onclick="window.location.href='/home';">Cancel</button>
+                    <button type="button" class="rounded-md px-5 py-3 shadow-sm text-sm font-semibold leading-6 text-gray-900 hover:text-white hover:bg-red-700" onclick="window.location.href='/home';">Cancel</button>
                     <button type="submit" class="rounded-md bg-indigo-600 px-5 py-3 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-600 ml-4">Save</button>
                 </div>
             </form>

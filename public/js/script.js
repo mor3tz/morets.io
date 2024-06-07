@@ -22,3 +22,7 @@ function showUploadFileName(type) {
         uploadText.textContent = 'Upload a file';
     }
 }
+
+
+   
+    

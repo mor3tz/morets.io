@@ -11,17 +11,37 @@
     <div class="py-10">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg min-h-[600px]">
-                <div class="p-6 text-gray-600">
-                    {{ __(" Dashboard Pengajuan Badge") }}
+                <div class="p-6 text-gray-600 font-bold text-lg text-center">
+                    {{ __(" DASHBOARD PENGAJUAN BADGE") }}
 
                     <!-- Button for creating new file -->
                     <div class="flex justify-between">
                         @if (Auth::user()->role == 'admin')
-                            <div class="mt-4  space-x-4">
+                            {{-- <div class="mt-4  space-x-4">
                                 <a href="{{ route('pengajuan') }}" class="px-4 py-2 bg-green text-white font-bold text-xs uppercase rounded hover:bg-orange transition duration-300 ease-in-out">
                                     + Pengajuan Baru
                                 </a>
+                            </div> --}}
+
+                            <div class="button-icon mt-10">
+                                <div class="icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="bevel"><path d="M20 11.08V8l-6-6H6a2 2 0 0 0-2 2v16c0 1.1.9 2 2 2h6"/>
+                                        <path d="M14 3v5h5M18 21v-6M15 18h6"/>
+                                    </svg>
+                                </div>
+                                    <a href="{{ route('pengajuan') }}" class="icon-link">
+                                        <div class="cube">
+                                            <span class="side front items-center" >
+                                                <svg class="mr-2" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="bevel"><path d="M20 14.66V20a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h5.34"></path><polygon points="18 2 22 6 12 16 8 16 8 12 18 2"></polygon>
+                                                </svg> New File
+                                            </span>
+                                            <span class="side top">Pengajuan Badge</span>
+                                        </div>
+                                    </a>
                             </div>
+                            
+                              
+
                         @endif
 
                         <!-- toast -->

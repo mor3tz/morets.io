@@ -6,15 +6,15 @@
     </x-slot>
 
     <!-- Main content container -->
-    <div class="bg-gray-100 py-8 px-4 md:px-6 lg:px-10 pt-3">
+    <div class="bg-white py-8 px-4 md:px-6 lg:px-10 pt-3">
         <div class="max-w-3xl mx-auto">
 
             
             <!-- Card for personal information -->
             <div class="bg-white rounded-lg overflow-hidden shadow-xl">
                 <!-- Profile header -->
-                <div class="bg-gray-800 px-4 py-5 sm:px-6">
-                    <h3 class="text-bold leading-6 font-medium text-lg text-white text-center">
+                <div class="bg-gray-100 px-4 py-5 sm:px-6">
+                    <h3 class="text-bold leading-6 font-bold text-gray-800 text-center">
                         INFORMASI PEMOHON
                     </h3>
                 </div>
@@ -87,15 +87,15 @@
             <!-- Document photos card -->
             <div class="bg-white rounded-lg overflow-hidden shadow-xl mt-6">
                 <!-- Document photos header -->
-                <div class="bg-gray-800 px-4 py-5 sm:px-6">
-                    <h3 class="text-bold leading-6 font-medium text-lg text-white text-center">
+                <div class="bg-gray-100 px-4 py-5 sm:px-6">
+                    <h3 class="text-bold leading-6 font-bold text-lg text-gray-800 text-center">
                         DOCUMENT
                     </h3>
                 </div>
 
                 <div class="px-4 py-5 sm:p-6 text-center">
                     <!-- Document photos -->
-                    <div class="flex flex-col items-center space-y-4">
+                    <div class="flex justify-center items-center space-x-4">
                         <div>
                             <p class="font-semibold">Foto KTP</p>
                             <img src="{{ asset('storage/foto_ktp/' . $pengajuan->foto_ktp) }}" alt="Foto KTP" class="max-w-xs h-auto mx-auto rounded-lg shadow">
@@ -105,7 +105,9 @@
                             <img src="{{ asset('storage/kartu_vaksin/' . $pengajuan->kartu_vaksin) }}" alt="Kartu Vaksin" class="max-w-xs h-auto mx-auto rounded-lg shadow">
                         </div>
                     </div>
-                </div>   
+                </div>
+                
+                
             </div>
             <div class="flex justify-between">
                 <div>
