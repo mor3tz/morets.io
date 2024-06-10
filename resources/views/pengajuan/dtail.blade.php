@@ -7,7 +7,7 @@
 
     <!-- Main content container -->
     <div class="bg-white py-8 px-4 md:px-6 lg:px-10 pt-3">
-        <div class="max-w-3xl mx-auto">
+        <div class="max-w-3xl mx-auto ">
 
             
             <!-- Card for personal information -->
@@ -18,70 +18,6 @@
                         INFORMASI PEMOHON
                     </h3>
                 </div>
-
-                <div class="px-4 py-5 sm:p-6">
-                    <!-- Personal information -->
-                    <div class="overflow-x-auto">
-                        <table class="table-auto w-full">
-                            <tbody>
-                                <tr>
-                                    <td class="font-semibold px-4 py-2">Nama :</td>
-                                    <td class="px-4 py-2">{{ $pengajuan->nama }}</td>
-                                </tr>
-                                <tr>
-                                    <td class="font-semibold px-4 py-2">Unit Kerja :</td>
-                                    <td class="px-4 py-2">{{ $pengajuan->unit_kerja }}</td>
-                                </tr>
-                                <tr>
-                                    <td class="font-semibold px-4 py-2">No. KTP :</td>
-                                    <td class="px-4 py-2">{{ $pengajuan->no_ktp }}</td>
-                                </tr>
-                                <tr>
-                                    <td class="font-semibold px-4 py-2">Area :</td>
-                                    <td class="px-4 py-2">{{ $pengajuan->area }}</td>
-                                </tr>
-                                <tr>
-                                    <td class="font-semibold px-4 py-2">Nama Perusahaan :</td>
-                                    <td class="px-4 py-2">{{ $pengajuan->nama_perusahaan }}</td>
-                                </tr>
-                                <tr>
-                                    <td class="font-semibold px-4 py-2">Lama Bekerja :</td>
-                                    <td class="px-4 py-2">{{ $pengajuan->lama_bekerja }}</td>
-                                </tr>
-                                <tr>
-                                    <td class="font-semibold px-4 py-2">Tanggal Mulai Bekerja :</td>
-                                    <td class="px-4 py-2">{{ $pengajuan->tanggal_mulai }}</td>
-                                </tr>
-                                <tr>
-                                    <td class="font-semibold px-4 py-2">Status :</td>
-                                    @if (isset($pengajuan->latest_status))
-                                        <td class="font-semibold px-4 py-2">
-                                            <span class="bg-{{ $pengajuan->latest_status_color }}-300 text-black px-2 py-1 rounded">
-                                                {{ $pengajuan->latest_status }}
-                                            </span>
-                                        </td>
-                                    @else
-                                        <td class="px-4 py-2">
-                                            <span class="bg-yellow-300  px-2 py-1 rounded uppercase">{{ $pengajuan->status }}</span>
-                                        </td>
-                                    @endif
-                                   
-                                </tr>
-
-                                @foreach ($pengajuan->approvals as $approval)
-                                <tr>
-                                    
-                                        
-                                    <td class="px-4 py-2">
-                                        <span class="bg-yellow-300 text-yellow-800 px-2 py-1 rounded">{{ $approval->approver_role }}</span>
-                                        <span class="bg-yellow-300 text-yellow-800 px-2 py-1 rounded">{{ $approval->approval_status }}</span>
-                                    </td>
-                                </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
             </div>
 
             <!-- Document photos card -->
@@ -89,7 +25,7 @@
                 <!-- Document photos header -->
                 <div class="bg-gray-100 px-4 py-5 sm:px-6">
                     <h3 class="text-bold leading-6 font-bold text-lg text-gray-800 text-center">
-                        DOCUMENT
+                        DOCUMENT FOTO
                     </h3>
                 </div>
 

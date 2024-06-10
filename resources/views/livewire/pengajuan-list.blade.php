@@ -17,16 +17,48 @@
                 <h3 class="text-bold leading-6 font-bold text-lg text-black text-center">
                     INFORMASI PEMOHON
                 </h3>
+                <hr class="mt-5 h-1 bg-black shadow-lg">
                 <div id="detail-content">
                     {{-- content detail --}}
+                    <div class="">
+
                     
-                </div>
-            </header>
+                        <table>
+                            <tr>
+                                <td>
+                                    Unit kerja
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Area
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Nama Perusahaan
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Lama Bekerja
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Mulai Bekerja
+                                </td>
+                            </tr>
+                        </table>
+                
+                    </div>
+                </div>   
+                </header>
         </div>
 
      
                 <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 mt-14">
-                    <thead class="text-sm text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">               
+                    <thead class="text-sm text-gray-700 uppercase bg-gray-200 dark:bg-gray-700 dark:text-gray-400">               
                         <tr>
                             @if (Auth::user()->role != 'admin')
                                 <th class="px-6 py-3 border-b border-gray-200 text-gray-800 text-left text-xs font-semibold uppercase tracking-wider">
@@ -98,15 +130,20 @@
                                         @endif
                                     @endif
                                 </td>
-                                <td class="px-6 py-4">
-                                    <div>
+                                <td class="px-6 py-4 justify-between flex">
+                                    <div class="inline-flex space-x-2">
                                         <a href="{{ route('pengajuan.show', ['id' => $pengajuan->id]) }}"
-                                            class="detail-link px-3 py-2 w-36 shadow-lg bg-blue-500 text-white rounded hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75 transition duration-150 ease-in-out flex items-center justify-center">
+                                            class="px-3 py-2  bg-blue-500 text-white rounded hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75 transition duration-150 ease-in-out flex items-center justify-center">
                                             <i class="fas fa-info-circle mr-2"></i>
                                             Detail
                                         </a>
+                                        <a href="{{ route('pengajuan', ['id' => $pengajuan->id]) }}"
+                                            class="px-3 py-2  bg-blue-500 text-white rounded hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75 transition duration-150 ease-in-out flex items-center justify-center">
+                                            <i class=" fa-regular fa-folder-open mr-2"></i>
+                                            Data
+                                        </a>
                                     </div>
-                                </td>
+                                </td>                                
                             </tr>
                         @endforeach
                         <!-- many approve 2nd part -->
