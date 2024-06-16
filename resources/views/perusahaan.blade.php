@@ -1,6 +1,6 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-white text-xl leading-tight flex justify-between items-center">
+        <h2 class="font-semibold text-xl leading-tight flex justify-between items-center">
             {{ $perusahaan }}
             <div class="text-right text-sm">
                 {{ __('FUTURE IS OURS') }}

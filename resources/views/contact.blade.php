@@ -1,9 +1,10 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-white text-xl leading-tight flex justify-between items-center">
+        <h2 class="font-semibold  text-xl leading-tight flex justify-between items-center">
             {{ __('CONTACT US') }}
             <div class="text-right text-sm">
-                {{ __('FUTURE IS OURS') }}
+              <i class="fa-solid fa-hashtag"></i>  
+              {{ __('FUTURE IS OURS') }}
             </div>
         </h2>
     </x-slot>

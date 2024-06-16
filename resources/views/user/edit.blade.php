@@ -1,6 +1,6 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-white text-xl leading-tight flex justify-between items-center">
+        <h2 class="font-semibold text-gray-800 text-xl leading-tight flex justify-between items-center">
             {{ __('Edit User') }}
             <div class="text-right text-sm">
                 {{ __('FUTURE IS OURS') }}
@@ -64,12 +64,18 @@
                     <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
                 </div>
         
-                <div class="flex items-center justify-end mt-4">
-                   
-                    <x-primary-button class="ms-4">
-                        {{ __('Update') }}
-                    </x-primary-button>
+                <div class="flex items-center justify-between mt-4">
+                    <a href=" {{ route('user.index') }}"class="mt-5 w-1/5 inline-flex items-center justify-center px-4 py-2 bg-orange border border-transparent rounded-md font-bold text-xs text-white uppercase tracking-widest hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150">
+                        <i class="fa-solid fa-arrow-left mr-2"></i>
+                        Back
+                    </a>
+                    <button type="submit" class="mt-5 w-1/5 inline-flex items-center justify-center px-4 py-2 bg-blue-500 border border-transparent rounded-md font-bold text-xs text-white uppercase tracking-widest hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150">
+                        <i class="fa-solid fa-pen-to-square mr-2"></i>
+                        {{ 'update' }}
+                    </button>
                 </div>
+                
+               
             </form>
         </div>
     </div>

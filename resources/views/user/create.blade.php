@@ -1,6 +1,6 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-white text-xl leading-tight flex justify-between items-center">
+        <h2 class="font-semibold text-gray-800 text-xl leading-tight flex justify-between items-center">
             {{ __('Create User') }}
             <div class="text-right text-sm">
                 {{ __('FUTURE IS OURS') }}

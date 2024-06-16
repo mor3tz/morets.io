@@ -1,5 +1,5 @@
 <div>
-    <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+    <div class="relative overflow-x-auto shadow-lg sm:rounded-lg">
         <div class="flex flex-column sm:flex-row flex-wrap space-y-4 sm:space-y-0 items-center justify-between pb-4">
             <label for="table-search" class="sr-only">Search</label>
 
@@ -14,44 +14,11 @@
         <!-- header -->
         <div class="bg-gray-100 p-10 rounded-lg">
             <header>
-                <h3 class="text-bold leading-6 font-bold text-lg text-black text-center">
+                <h3 class="text-semibold leading-6 font-bold text-lg text-black text-center">
                     INFORMASI PEMOHON
                 </h3>
-                <hr class="mt-5 h-1 bg-black shadow-lg">
                 <div id="detail-content">
                     {{-- content detail --}}
-                    <div class="">
-
-                    
-                        <table>
-                            <tr>
-                                <td>
-                                    Unit kerja
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    Area
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    Nama Perusahaan
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    Lama Bekerja
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    Mulai Bekerja
-                                </td>
-                            </tr>
-                        </table>
-                
-                    </div>
                 </div>   
                 </header>
         </div>
@@ -68,6 +35,8 @@
                             <th scope="col" class="px-6 py-3">Nama</th>
                             
                             <th scope="col" class="px-6 py-3">No KTP</th>
+                            <th scope="col" class="px-6 py-3">Tanggal Berkunjung</th>
+                            <th scope="col" class="px-6 py-3">Kunjungan Terakhir</th>
                             
                             <th scope="col" class="px-6 py-3">Status</th>
                             <th scope="col" class="px-6 py-3">More</th>
@@ -103,6 +72,8 @@
                                 <td class="px-6 py-4">
                                 {{ $pengajuan->no_ktp }}
                                 </td>
+                                <td class="px-6 py-4">10/02/2022</td>
+                                <td class="px-6 py-4">13/05/2077</td>
                                 <td class="px-6 py-4">
                                     @if (Auth::user()->role == 'admin')
                                         @if (isset($pengajuan->latest_status))
@@ -131,18 +102,162 @@
                                     @endif
                                 </td>
                                 <td class="px-6 py-4 justify-between flex">
-                                    <div class="inline-flex space-x-2">
+                                    {{-- <div class="inline-flex space-x-2">
                                         <a href="{{ route('pengajuan.show', ['id' => $pengajuan->id]) }}"
-                                            class="px-3 py-2  bg-blue-500 text-white rounded hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75 transition duration-150 ease-in-out flex items-center justify-center">
-                                            <i class="fas fa-info-circle mr-2"></i>
+                                            class="px-3 py-2 tracking-wider bg-blue-500 text-white rounded hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75 transition duration-150 ease-in-out flex items-center justify-center">
+                                            <i class="fa-regular fa-folder-open mr-2"></i>
                                             Detail
-                                        </a>
-                                        <a href="{{ route('pengajuan', ['id' => $pengajuan->id]) }}"
-                                            class="px-3 py-2  bg-blue-500 text-white rounded hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75 transition duration-150 ease-in-out flex items-center justify-center">
-                                            <i class=" fa-regular fa-folder-open mr-2"></i>
-                                            Data
-                                        </a>
+                                        </a> 
+                                    </div> --}}
+
+                                <!-- Modal toggle -->
+                                <button data-modal-target="default-modal{{ $pengajuan->id }}" data-modal-toggle="default-modal{{ $pengajuan->id }}" class="block text-white px-3 py-2 
+                                    tracking-wider bg-blue-500 text-white rounded
+                                    hover:bg-blue-600 focus:outline-none focus:ring-2
+                                    focus:ring-blue-400 focus:ring-opacity-75 transition
+                                    duration-150 ease-in-out flex items-center justify-center" type="button">
+                                        <i class="fa-regular fa-folder-open mr-2"></i>
+                                        Details
+                                    </a>
+                                </button>
+                                
+                                <!-- Main modal -->
+                                <!-- Modal structure -->
+                                <div id="default-modal{{ $pengajuan->id }}" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+                                    <div class="relative p-4 w-full max-w-6xl max-h-full">
+                                        <!-- Modal content -->
+                                        <div class="relative bg-blue-500 rounded-lg shadow dark:bg-gray-800">
+                                            <!-- Modal header -->
+                                            
+                                            <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
+                                                <h3 class="text-xl items-center font-semibold text-white dark:text-white text-center w-full">
+                                                    Details Pengajuan User
+                                                </h3>
+                                                <button type="button" class="text-gray-400 bg-transparent  hover:text-white rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="default-modal{{ $pengajuan->id }}">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M256 48a208 208 0 1 1 0 416 208 208 0 1 1 0-416zm0 464A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM175 175c-9.4 9.4-9.4 24.6 0 33.9l47 47-47 47c-9.4 9.4-9.4 24.6 0 33.9s24.6 9.4 33.9 0l47-47 47 47c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-47-47 47-47c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-47 47-47-47c-9.4-9.4-24.6-9.4-33.9 0z"/></svg>
+                                                    
+                                                    <span class="sr-only">Close modal</span>
+                                                </button>
+                                            </div>
+                                            <!-- Modal body -->
+                                            <div class="bg-gray-100 flex items-center justify-center max-h-screen">
+                                                <div class="text-base mb-5 font-semibold text-black mt-10">
+                                                <table>
+                                                    <tr>
+                                                        <td class="py-2 px-6 ">Nama Pengaju</td>
+                                                        <td class="py-2 px-4 "> : {{ $pengajuan->nama }}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="py-2 px-6 ">No HandPhone</td>
+                                                        <td class="py-2 px-4 "> : 081231242342</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="py-2 px-6 ">Unit Kerja</td>
+                                                        <td class="py-2 px-4 "> : {{ $pengajuan->unit_kerja }}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="py-2 px-6 ">Nama Perusahaan/Instansi</td>
+                                                        <td class="py-2 px-4 "> : {{ $pengajuan->nama_perusahaan }}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <tdD></td>
+                                                        <td></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td></td>
+                                                        <td></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td></td>
+                                                        <td></td>
+                                                    </tr>.
+                                                </table>
+                                            
+                                                    <div class="text-center mt-5 text-lg border-t font-medium  rounded-lg px-4 py-2 text-black">
+                                                        <span class="mt-10">
+                                                            ATTACHMENT
+                                                        </span>
+                                                    </div>
+                                                        <div class="px-4 py-5 sm:p-6 text-center">
+                                                            <!-- Document photos -->
+                                                            
+
+                                                        <div class="sm:hidden">
+                                                            <label for="tabs" class="sr-only">Document</label>
+                                                            <select id="tabs" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                                                <option>Foto KTP</option>
+                                                                <option>Kartu Vaksin</option>
+                                                                <option>setting</option>
+                                                                <option>Invoioce</option>
+                                                            </select>
+                                                        </div>
+                                                            <ul class="hidden flex text-sm  font-medium text-center text-gray-500 rounded-sm shadow sm:flex dark:divide-gray-700 dark:text-gray-400">
+                                                                <li class="w-full sm:w-auto focus-within:z-10">
+                                                                    <a href="{{ asset('storage/foto_ktp/' . $pengajuan->foto_ktp) }}" target="_blank" rel="noopener noreferrer" class="block w-full py-5 px-4 text-gray-900 bg-gray-100 hover:bg-gray-50 border-r border-gray-200 dark:border-gray-700 rounded-l-lg focus:ring-4 focus:ring-blue-300 active focus:outline-none dark:bg-gray-700 dark:text-white" aria-current="page">Foto KTP</a>
+                                                                </li>
+                                                                <li class="w-full sm:w-auto focus-within:z-10">
+                                                                    <a href="{{ asset('storage/kartu_vaksin/' . $pengajuan->kartu_vaksin) }}" target="_blank" rel="noopener noreferrer" class="block w-full py-5 px-4 text-gray-900  border-r border-gray-200 dark:border-gray-700 hover:text-gray-700 hover:bg-gray-50 focus:ring-4 focus:ring-blue-300 focus:outline-none dark:hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700">Kartu Vaksin</a>
+                                                                </li>
+                                                                <li class="w-full sm:w-auto focus-within:z-10">
+                                                                    <a href="#" target="_blank" rel="noopener noreferrer" class="block w-full py-5 px-4 text-gray-900  border-r border-gray-200 dark:border-gray-700 hover:text-gray-700 hover:bg-gray-50 focus:ring-4 focus:ring-blue-300 focus:outline-none dark:hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700">SKCK</a>
+                                                                </li>
+                                                                <li class="w-full sm:w-auto focus-within:z-10">
+                                                                    <a href="#" target="_blank" rel="noopener noreferrer" class="block w-full py-5 px-6 text-gray-900  border-r border-gray-200 dark:border-gray-700 hover:text-gray-700 hover:bg-gray-50 focus:ring-4 focus:ring-blue-300 focus:outline-none dark:hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700">SURAT BEBAS NARKOBA</a>
+                                                                </li>
+                                                                <li class="w-full sm:w-auto focus-within:z-10">
+                                                                    <a href="#" target="_blank" rel="noopener noreferrer" class="block w-full py-5 px-4 text-gray-900 bg-gray-100 border-gray-200 dark:border-gray-700 hover:bg-gray-50 rounded-r-lg focus:ring-4 focus:ring-blue-300 active focus:outline-none dark:bg-gray-700 dark:text-white">SURAT KESEHATAN</a>
+                                                                </li>
+                                                            </ul>
+                                                            
+                                                            <h3 class="mt-5 text-base font-semibold">DATA</h3>
+
+                                                            <table class="w-full text-sm text-left rtl:text-right text-gray dark:text-gray-400 mt-10">
+                                                                <tr>
+                                                                    <td class="">Nama Tamu</td>
+                                                                    <td class=""> : Nama Tamu</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="">NIK</td>
+                                                                    <td class=""> : NIK</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="">No HandPhone</td>
+                                                                    <td class=""> : No HandPhone</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="">Keperluan</td>
+                                                                    <td class=""> : Keperluan</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="">Tujuan Berkunjung</td>
+                                                                    <td class=""> :Tujuan Berkunjung</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="">Tanggal Kunjungan</td>
+                                                                    <td class=""> : 5/06/2024 - 8-06-2024</td>
+                                                                </tr>
+                                                            </table>
+                                                    </div>
+                                                    </div>
+                                                </div>
+                                                <!-- Modal footer -->
+                                                <div class="flex flex-col items-center justify-start p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600">
+                                                    <!-- Buttons container -->
+                                                    <div class="flex justify-between  w-full space-x-4 mt-4">
+                                                        <button data-modal-hide="default-modal{{ $pengajuan->id }}" type="button" class="btn"> Back</button>
+
+                                                        @if (Auth::user()->role == 'admin')
+                                                            <button class="btn-2">Delete</button>
+                                                        @endif
+                                                        <button  class="btn-3">Accept</button>
+                                                        
+                                                    </div>
+                                                </div>
+                                        </div>   
+                                        </div>
                                     </div>
+                                </div>
+                                </div>
                                 </td>                                
                             </tr>
                         @endforeach
@@ -155,32 +270,32 @@
                                     </button>
                                 </td>
                             </tr>
-                            <div id="approve_modal" tabindex="-1" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
-                                <div class="relative p-4 w-full max-w-md max-h-full">
-                                    <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
-                                        <button type="button" class="absolute top-3 end-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="approve_modal">
-                                            <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
-                                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
-                                            </svg>
-                                            <span class="sr-only">Close modal</span>
-                                        </button>
-                                        <div class="p-4 md:p-5 text-center">
-                                            <svg class="mx-auto mb-4 text-gray-400 w-12 h-12 dark:text-gray-200" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
-                                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
-                                            </svg>
-                                            <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">Are you sure you want to approve it</h3>
-                                            <button data-modal-hide="approve_modal" type="submit" class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center">
-                                                Yes, I'm sure
+                                <div id="approve_modal" tabindex="-1" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+                                    <div class="relative p-4 w-full max-w-md max-h-full">
+                                        <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                                            <button type="button" class="absolute top-3 end-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="approve_modal">
+                                                <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                                                </svg>
+                                                <span class="sr-only">Close modal</span>
                                             </button>
-                                            <button data-modal-hide="approve_modal" type="button" class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">No, cancel</button>
+                                            <div class="p-4 md:p-5 text-center">
+                                                <svg class="mx-auto mb-4 text-gray-400 w-12 h-12 dark:text-gray-200" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
+                                                </svg>
+                                                <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">Are you sure you want to approve it</h3>
+                                                <button data-modal-hide="approve_modal" type="submit" class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center">
+                                                    Yes, I'm sure
+                                                </button>
+                                                <button data-modal-hide="approve_modal" type="button" class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">No, cancel</button>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
                             </form>
                         @endif                
                     </tbody>
-                </table>
-     </div>           
+                </table>         
+            </div>           
+        </div>
     </div>
-</div>

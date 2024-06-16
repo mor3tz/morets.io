@@ -1,8 +1,9 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-white text-xl leading-tight flex justify-between items-center">
+        <h2 class="font-semibold text-gray-800 text-xl leading-tight flex justify-between items-center">
             {{ __('DASHBOARD') }}
             <div class="text-right text-sm">
+                <i class="fa-solid fa-hashtag"></i>
                 {{ __('FUTURE IS OURS') }}
             </div>
         </h2>
@@ -23,22 +24,26 @@
                                 </a>
                             </div> --}}
 
-                            <div class="button-icon mt-10">
-                                <div class="icon">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="bevel"><path d="M20 11.08V8l-6-6H6a2 2 0 0 0-2 2v16c0 1.1.9 2 2 2h6"/>
-                                        <path d="M14 3v5h5M18 21v-6M15 18h6"/>
-                                    </svg>
+                            <a href="{{ route('pengajuan') }}">
+                            <button class="cssbuttons-io-button mt-10">
+                                    <i class="fa-solid fa-plus mr-2"></i>
+                                    New File
+                                    <div class="icon">
+                                    <svg
+                                    height="24"
+                                    width="24"
+                                    viewBox="0 0 24 24"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                  >
+                                    <path d="M0 0h24v24H0z" fill="none"></path>
+                                    <path d="M16.172 11l-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z"
+                                    fill="currentColor"></path>
+                                </svg>
                                 </div>
-                                    <a href="{{ route('pengajuan') }}" class="icon-link">
-                                        <div class="cube">
-                                            <span class="side front items-center" >
-                                                <svg class="mr-2" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="bevel"><path d="M20 14.66V20a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h5.34"></path><polygon points="18 2 22 6 12 16 8 16 8 12 18 2"></polygon>
-                                                </svg> New File
-                                            </span>
-                                            <span class="side top">Pengajuan Badge</span>
-                                        </div>
-                                    </a>
-                            </div>
+                            </button>
+                        </a>
+                              
+                            
                             
                               
 

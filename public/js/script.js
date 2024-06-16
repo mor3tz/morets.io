@@ -24,5 +24,54 @@ function showUploadFileName(type) {
 }
 
 
-   
+function showInput() {
+    var select = document.getElementById("keperluan");
+    var lainnyaInput = document.getElementById("lainnya");
+
+    if (select.value === "other") {
+        lainnyaInput.classList.remove("hidden");
+    } else {
+        lainnyaInput.classList.add("hidden");
+    }
+}
     
+
+function showOtherInput() {
+    var select = document.getElementById("tujuan_berkunjung");
+    var lainnyaInput = document.getElementById("tujuan_berkunjung_lainnya");
+
+    if (select.value === "Lainnya") {
+        lainnyaInput.classList.remove("hidden");
+    } else {
+        lainnyaInput.classList.add("hidden");
+    }
+}
+
+
+
+document.addEventListener('DOMContentLoaded', function () {
+    flatpickr("input[name='start']", {
+        dateFormat: "Y-m-d",
+        onChange: function(selectedDates, dateStr, instance) {
+            console.log('Selected start date:', dateStr);
+        }
+    });
+
+    flatpickr("input[name='end']", {
+        dateFormat: "Y-m-d",
+        onChange: function(selectedDates, dateStr, instance) {
+            console.log('Selected end date:', dateStr);
+        }
+    });
+});
+
+
+function showOtherInput() {
+    var select = document.getElementById('tujuan_berkunjung');
+    var otherInput = document.getElementById('tujuan_berkunjung_lainnya');
+    if (select.value === 'other') {
+      otherInput.classList.remove('hidden');
+    } else {
+      otherInput.classList.add('hidden');
+    }
+  }

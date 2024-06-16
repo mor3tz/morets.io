@@ -210,64 +210,241 @@ h2 {
 
 
   /* btn pengajuan */
-  .button-icon {
+  .cssbuttons-io-button {
+    background: #7E8EF1;
+    color: white;
+    font-family: inherit;
+    padding: 0.35em;
+    padding-left: 1.2em;
+    font-size: 17px;
+    font-weight: 500;
+    border-radius: 0.9em;
+    border: none;
+    letter-spacing: 0.05em;
     display: flex;
-    border: 3px solid #fff;
-    width: fit-content;
-    height: fit-content;
-    cursor: pointer;
-    position: relative; /* Menambahkan ini untuk memastikan posisi anak-anaknya */
-}
-
-.icon {
-    background-color: #fff;
-    padding: 10px 10px 5px 10px;
-}
-
-.icon svg {
-    width: 25px;
-    height: 25px;
-}
-
-.cube {
-    transition: all 0.4s;
-    transform-style: preserve-3d;
-    width: 200px;
-    height: 47px; /* Sesuaikan tinggi cube sesuai dengan side */
-    position: relative; /* Menambahkan ini untuk memastikan posisi anak-anaknya */
-}
-
-.button-icon:hover {
-    border-color: #FC4100;
-}
-
-.button-icon:hover .cube {
-    transform: rotateX(90deg);
-}
-
-.side {
-    position: absolute;
-    height: 47px; /* Sesuaikan tinggi sesuai kebutuhan */
-    width: 200px;
-    display: flex;
-    font-size: 0.8em;
-    justify-content: center;
     align-items: center;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    font-weight: bold;
-    backface-visibility: hidden; /* Menambahkan ini untuk menghindari tampilan sisi belakang */
+    box-shadow: inset 0 0 1.6em -0.6em #7E8EF1;
+    overflow: hidden;
+    position: relative;
+    height: 2.8em;
+    padding-right: 3.3em;
+    cursor: pointer;
+  }
+  
+  .cssbuttons-io-button .icon {
+    background: white;
+    margin-left: 1em;
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 2.2em;
+    width: 2.2em;
+    border-radius: 0.7em;
+    box-shadow: 0.1em 0.1em 0.6em 0.2em #7E8EF1;
+    right: 0.3em;
+    transition: all 0.3s;
+  }
+  
+  .cssbuttons-io-button:hover .icon {
+    width: calc(100% - 0.6em);
+  }
+  
+  .cssbuttons-io-button .icon svg {
+    width: 1.1em;
+    transition: transform 0.3s;
+    color: #7b52b9;
+  }
+  
+  .cssbuttons-io-button:hover .icon svg {
+    transform: translateX(0.1em);
+  }
+  
+  .cssbuttons-io-button:active .icon {
+    transform: scale(0.95);
+  }
+
+
+.tabs {
+  width: 300px;
+}
+.tab-buttons {
+  display: flex;
+  justify-content: space-between;
+}
+.tab-buttons button {
+  flex: 1;
+  padding: 10px;
+  background: #ccc;
+  border: none;
+  cursor: pointer;
+  text-align: center;
+  font-weight: bold;
+}
+.tab-buttons button.active {
+  background: #ff6b6b;
+  color: white;
+}
+.tab-content {
+  display: none;
+  padding: 20px;
+  background: white;
+  border: 1px solid #ccc;
+  border-top: none;
+  border-radius: 0 0 8px 8px;
+}
+.tab-content.active {
+  display: block;
+}
+.tab-content img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
 }
 
-.top {
-    background: #FC4100;
-    color: #fff;
-    transform: rotateX(-90deg) translate3d(0, 0, 20px); /* Sesuaikan translateZ agar pas dengan tinggi front */
+
+/* .bg-sky {
+  background-color: #4793AF; 
 }
 
-.front {
-    background: #222229;
-    color: #fff;
-    transform: translateZ(20px); /* Sesuaikan translateZ agar pas dengan tinggi side */
+.dark:bg-gray-800 {
+  background-color: #1f2937; 
 }
 
+.bgwhite {
+  background-color: #F9F9F9;
+} */
+
+
+.btn {
+  width: 130px;
+  height: 40px;
+  font-size: 1.1em;
+  cursor: pointer;
+  background-color: #171717;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  transition: all .4s;
+ }
+ 
+ .btn:hover {
+  border-radius: 5px;
+  transform: translateY(-10px);
+  box-shadow: 0 7px 0 -2px #f85959,
+   0 15px 0 -4px #39a2db,
+   0 16px 10px -3px #39a2db;
+ }
+ 
+ .btn:active {
+  transition: all 0.2s;
+  transform: translateY(-5px);
+  box-shadow: 0 2px 0 -2px #f85959,
+   0 8px 0 -4px #39a2db,
+   0 12px 10px -3px #39a2db;
+ }
+
+ /* ----------- */
+ .btn-2 {
+  width: 130px;
+  height: 40px;
+  font-size: 1.1em;
+  cursor: pointer;
+  background-color: red;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  transition: all .4s;
+ }
+ 
+ .btn-2:hover {
+  border-radius: 5px;
+  transform: translateY(-10px);
+  box-shadow: 0 7px 0 -2px #f85959,
+   0 15px 0 -4px #39a2db,
+   0 16px 10px -3px #39a2db;
+ }
+ 
+ .btn-2:active {
+  transition: all 0.2s;
+  transform: translateY(-5px);
+  box-shadow: 0 2px 0 -2px #f85959,
+   0 8px 0 -4px #39a2db,
+   0 12px 10px -3px #39a2db;
+ }
+
+
+ .btn-3 {
+  width: 130px;
+  height: 40px;
+  font-size: 1.1em;
+  cursor: pointer;
+  background-color: lime;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  transition: all .4s;
+ }
+ 
+ .btn-3:hover {
+  border-radius: 5px;
+  transform: translateY(-10px);
+  box-shadow: 0 7px 0 -2px #f85959,
+   0 15px 0 -4px #39a2db,
+   0 16px 10px -3px #39a2db;
+ }
+ 
+ .btn-3:active {
+  transition: all 0.2s;
+  transform: translateY(-5px);
+  box-shadow: 0 2px 0 -2px #f85959,
+   0 8px 0 -4px #39a2db,
+   0 12px 10px -3px #39a2db;
+ }
+
+
+ .dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: white;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {
+  background-color: #f1f1f1;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.dropdown-button {
+  background-color: #3b82f6;
+  color: white;
+  padding: 10px 16px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.dropdown-button:hover {
+  background-color: #2563eb;
+}

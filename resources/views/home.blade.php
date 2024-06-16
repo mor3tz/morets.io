@@ -1,8 +1,9 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-white leading-tight flex justify-between items-center">
+        <h2 class="font-semibold text-xl text-black leading-tight flex justify-between items-center">
             {{ __('HOME') }}
             <div class="text-right text-sm">
+                <i class="fa-solid fa-hashtag"></i>
                 {{ __('FUTURE IS OURS') }}
             </div>
         </h2>
@@ -27,7 +28,7 @@
         
 
               
-
+            @if(Auth::user()->role == 'admin')
             <div class="flex justify-center items-center mt-32 "> <!-- Parent container untuk tombol -->
                 <button class="continue-application">
                     <div>
@@ -46,6 +47,7 @@
                     </a>
                 </button>
             </div>            
+            @endif
         </div>
     </div>
     

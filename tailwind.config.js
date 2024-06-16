@@ -7,7 +7,7 @@ export default {
         './vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php',
         './storage/framework/views/*.php',
         './resources/views/**/*.blade.php',
-        "./node_modules/flowbite/**/*.js"
+        './node_modules/flowbite/**/*.js',
     ],
     theme: {
         extend: {
@@ -15,11 +15,15 @@ export default {
                 sans: ['Inter', ...defaultTheme.fontFamily.sans],
             },
             colors: {
-                'custom-beige': '#F5F5F5', 
-                'green': '#87A922', 
-                'orange': '#FC4100', 
+                'custom-beige': '#F5F5F5',
+                'green': '#87A922',
+                'orange': '#FC4100',
                 'white-custom': '#F5F7F8',
-                'table-color' : '#EEEEEE'
+                'table-color': '#EEEEEE',
+                'btn': '#7E8EF1',
+                'details': '#FFA62F',
+                'btndetails': '#FFDA78',
+                'dark': '#222831'
             },
         },
     },

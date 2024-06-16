@@ -1,9 +1,9 @@
 <x-app-layout>
-    <x-slot name="header">
+    {{-- <x-slot name="header">
         <h2 class="text-2xl font-bold text-white leading-tight">
             {{ __('Detail Pengajuan Badge') }}
         </h2>
-    </x-slot>
+    </x-slot> --}}
 
     <!-- Main content container -->
     <div class="bg-white py-8 px-4 md:px-6 lg:px-10 pt-3">
@@ -13,11 +13,6 @@
             <!-- Card for personal information -->
             <div class="bg-white rounded-lg overflow-hidden shadow-xl">
                 <!-- Profile header -->
-                <div class="bg-gray-100 px-4 py-5 sm:px-6">
-                    <h3 class="text-bold leading-6 font-bold text-gray-800 text-center">
-                        INFORMASI PEMOHON
-                    </h3>
-                </div>
             </div>
 
             <!-- Document photos card -->
@@ -42,8 +37,6 @@
                         </div>
                     </div>
                 </div>
-                
-                
             </div>
             <div class="flex justify-between">
                 <div>

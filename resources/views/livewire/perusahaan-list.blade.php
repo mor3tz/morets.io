@@ -2,7 +2,8 @@
 use Carbon\Carbon;
 @endphp
 
-<div>
+
+<div class="">
     <div class="relative overflow-x-auto shadow-lg sm:rounded-lg">
         @if (Auth::user()->role != 'user')    
         <div class="flex flex-col sm:flex-row flex-wrap space-y-4 sm:space-y-0 items-center justify-end pb-4">
@@ -16,7 +17,8 @@ use Carbon\Carbon;
                     </div>
                     <input wire:model.live.debounce300ms="search" type="text" id="table-search" class="block p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search for items">
                 </div>
-                <button id="search-button" class="search-button bg-blue-500 text-white py-2 px-4 rounded-lg">
+                <button id="search-button" class="search-button bg-blue-500  text-white py-2 px-4 rounded-lg">
+                    <i class="fa-solid fa-magnifying-glass"></i>
                     Search
                 </button>
             </div>
@@ -28,7 +30,7 @@ use Carbon\Carbon;
         
         @endif
         <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-            <thead class="text-sm text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+            <thead class="text-sm text-gray-700 uppercase bg-gray-200 dark:bg-gray-700 dark:text-gray-400">
                 @if (Auth::user()->role == 'user')
                 <tr>
                     <th scope="col" class="px-6 py-3">No</th>
@@ -105,11 +107,11 @@ use Carbon\Carbon;
                             </td>
                             <!-- modal progress -->
                            
-                                <!-- Modal toggle -->
+                                <!-- Modal toggle User-->
                                 <td class="px-6 py-4 ">
                                     <button data-modal-target="dtail{{ $loop->iteration }}" data-modal-toggle="dtail{{ $loop->iteration }}" class="block text-white rounded px-3 py-2 shadow-lg bg-blue-500 hover:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75 transition duration-150 ease-in-out  font-medium  text-sm text-center " type="button">
                                         <i class="fas fa-list-check mr-2"></i>
-                                        Progress
+                                        Tracking
                                     </button>
                                 </td>
                                 
@@ -207,7 +209,7 @@ use Carbon\Carbon;
                         </td>
                         <td class="px-6 py-4">
                             <div><a href="{{ route('perusahaan', ['perusahaan' => $pengajuan['nama_perusahaan']]) }}"
-                                class="px-3 py-2 w-36 bg-blue-500 text-white rounded hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75 transition duration-150 ease-in-out flex items-center justify-center">
+                                class="px-3 py-2 w-30 bg-lime-500 text-white rounded hover:bg-lime-400 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75 transition duration-150 ease-in-out flex items-center justify-center">
                                 <i class="fas fa-info-circle mr-2"></i>
                                 Detail</a></div>
                         </td>
