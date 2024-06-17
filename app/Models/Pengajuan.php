@@ -19,11 +19,20 @@ class Pengajuan extends Model
         'no_ktp',
         'foto_ktp',
         'kartu_vaksin',
+        'surat_kesehatan',
+        'bebas_narkoba',
+        'skck',
+        'surat_keterangan_user',
+        'keperluan',
+        'keperluan_lainnya',
+        'tujuan',
+        'tujuan_lainnya',
+        'lama_kunjungan',
         'area',
         'unit_kerja',
         'nama_perusahaan',
-        'lama_bekerja',
         'tanggal_mulai',
+        'tanggal_selesai',
         'status'
     ];
 

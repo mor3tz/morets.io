@@ -26,7 +26,7 @@ function showUploadFileName(type) {
 
 function showInput() {
     var select = document.getElementById("keperluan");
-    var lainnyaInput = document.getElementById("lainnya");
+    var lainnyaInput = document.getElementById("keperluan_lainnya");
 
     if (select.value === "other") {
         lainnyaInput.classList.remove("hidden");

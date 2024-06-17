@@ -199,13 +199,16 @@
                                                                     <a href="{{ asset('storage/kartu_vaksin/' . $pengajuan->kartu_vaksin) }}" target="_blank" rel="noopener noreferrer" class="block w-full py-5 px-4 text-gray-900  border-r border-gray-200 dark:border-gray-700 hover:text-gray-700 hover:bg-gray-50 focus:ring-4 focus:ring-blue-300 focus:outline-none dark:hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700">Kartu Vaksin</a>
                                                                 </li>
                                                                 <li class="w-full sm:w-auto focus-within:z-10">
-                                                                    <a href="#" target="_blank" rel="noopener noreferrer" class="block w-full py-5 px-4 text-gray-900  border-r border-gray-200 dark:border-gray-700 hover:text-gray-700 hover:bg-gray-50 focus:ring-4 focus:ring-blue-300 focus:outline-none dark:hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700">SKCK</a>
+                                                                    <a href="{{ asset('storage/skck/' . $pengajuan->skck) }}" target="_blank" rel="noopener noreferrer" class="block w-full py-5 px-4 text-gray-900  border-r border-gray-200 dark:border-gray-700 hover:text-gray-700 hover:bg-gray-50 focus:ring-4 focus:ring-blue-300 focus:outline-none dark:hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700">SKCK</a>
                                                                 </li>
                                                                 <li class="w-full sm:w-auto focus-within:z-10">
-                                                                    <a href="#" target="_blank" rel="noopener noreferrer" class="block w-full py-5 px-6 text-gray-900  border-r border-gray-200 dark:border-gray-700 hover:text-gray-700 hover:bg-gray-50 focus:ring-4 focus:ring-blue-300 focus:outline-none dark:hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700">SURAT BEBAS NARKOBA</a>
+                                                                    <a href="{{ asset('storage/bebas_narkoba/' . $pengajuan->bebas_narkoba) }}" target="_blank" rel="noopener noreferrer" class="block w-full py-5 px-6 text-gray-900  border-r border-gray-200 dark:border-gray-700 hover:text-gray-700 hover:bg-gray-50 focus:ring-4 focus:ring-blue-300 focus:outline-none dark:hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700">SURAT BEBAS NARKOBA</a>
                                                                 </li>
                                                                 <li class="w-full sm:w-auto focus-within:z-10">
-                                                                    <a href="#" target="_blank" rel="noopener noreferrer" class="block w-full py-5 px-4 text-gray-900 bg-gray-100 border-gray-200 dark:border-gray-700 hover:bg-gray-50 rounded-r-lg focus:ring-4 focus:ring-blue-300 active focus:outline-none dark:bg-gray-700 dark:text-white">SURAT KESEHATAN</a>
+                                                                    <a href="{{ asset('storage/surat_kesehatan/' . $pengajuan->surat_kesehatan) }}" target="_blank" rel="noopener noreferrer" class="block w-full py-5 px-4 text-gray-900 bg-gray-100 border-gray-200 dark:border-gray-700 hover:bg-gray-50 rounded-r-lg focus:ring-4 focus:ring-blue-300 active focus:outline-none dark:bg-gray-700 dark:text-white">SURAT KESEHATAN</a>
+                                                                </li>
+                                                                <li class="w-full sm:w-auto focus-within:z-10">
+                                                                    <a href="{{ asset('storage/surat_keterangan_user/' . $pengajuan->surat_keterangan_user) }}" target="_blank" rel="noopener noreferrer" class="block w-full py-5 px-4 text-gray-900 bg-gray-100 border-gray-200 dark:border-gray-700 hover:bg-gray-50 rounded-r-lg focus:ring-4 focus:ring-blue-300 active focus:outline-none dark:bg-gray-700 dark:text-white">SURAT KETERANGAN USER</a>
                                                                 </li>
                                                             </ul>
                                                             
@@ -214,11 +217,11 @@
                                                             <table class="w-full text-sm text-left rtl:text-right text-gray dark:text-gray-400 mt-10">
                                                                 <tr>
                                                                     <td class="">Nama Tamu</td>
-                                                                    <td class=""> : Nama Tamu</td>
+                                                                    <td class=""> : {{ $pengajuan->nama }}</td>
                                                                 </tr>
                                                                 <tr>
                                                                     <td class="">NIK</td>
-                                                                    <td class=""> : NIK</td>
+                                                                    <td class=""> : {{ $pengajuan->no_ktp }}</td>
                                                                 </tr>
                                                                 <tr>
                                                                     <td class="">No HandPhone</td>
@@ -226,15 +229,23 @@
                                                                 </tr>
                                                                 <tr>
                                                                     <td class="">Keperluan</td>
-                                                                    <td class=""> : Keperluan</td>
+                                                                    @if ($pengajuan->keperluan == "other")
+                                                                        <td class="capitalize"> : {{ $pengajuan->keperluan_lainnya }}</td>
+                                                                    @else
+                                                                        <td class="capitalize"> : {{ $pengajuan->keperluan }}</td>
+                                                                    @endif
                                                                 </tr>
                                                                 <tr>
                                                                     <td class="">Tujuan Berkunjung</td>
-                                                                    <td class=""> :Tujuan Berkunjung</td>
+                                                                    @if ($pengajuan->tujuan == "other")
+                                                                        <td class="capitalize"> : {{ $pengajuan->tujuan_lainnya }}</td>
+                                                                    @else
+                                                                        <td class="capitalize"> : {{ $pengajuan->tujuan }}</td>
+                                                                    @endif
                                                                 </tr>
                                                                 <tr>
                                                                     <td class="">Tanggal Kunjungan</td>
-                                                                    <td class=""> : 5/06/2024 - 8-06-2024</td>
+                                                                    <td class=""> : {{ $pengajuan->tanggal_mulai }} - {{ $pengajuan->tanggal_selesai }}</td>
                                                                 </tr>
                                                             </table>
                                                     </div>

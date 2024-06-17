@@ -42,42 +42,53 @@
                        <!-- Container utama -->
                        <!-- Foto KTP -->
                         <div class="flex space-x-4 mt-10">
-                            <form class="">
-                                <div class="w-1/2">
+                            <div class="w-1/2">
                                 <label class="block text-sm font-medium text-gray-900 dark:text-white" for="foto_ktp">FOTO KTP</label>
-                                <input class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" aria-describedby="foto_ktp_help" id="foto_ktp" type="file">
+                                <input required class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" aria-describedby="foto_ktp_help" id="foto_ktp" name="foto_ktp" type="file">
                                 <div class="text-sm text-gray-500 dark:text-gray-300" id="foto_ktp_help">Upload foto KTP Anda.</div>
-                                </div>
-                            </form>
+                                <x-input-error :messages="$errors->get('no_ktp')" class="mt-2" />
+                            </div>
 
                             <!-- Kartu Vaksin -->
                             
-                            <form class="w-1/2">                               
+                            <div class="w-1/2">                               
                                 <label class="block text-sm font-medium text-gray-900 dark:text-white" for="kartu_vaksin">KARTU VAKSIN</label>
-                                <input class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" aria-describedby="kartu_vaksin_help" id="kartu_vaksin" type="file">
+                                <input required class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" aria-describedby="kartu_vaksin_help" id="kartu_vaksin" name="kartu_vaksin" type="file">
                                 <div class="text-sm text-gray-500 dark:text-gray-300" id="kartu_vaksin_help">Upload kartu vaksin Anda.</div>  
-                            </form>
+                                <x-input-error :messages="$errors->get('kartu_vaksin')" class="mt-2" />
+                            </div>
                         </div>
 
                         <div class="flex space-x-4 mt-10">
-                            <form class="w-1/2">
+                            <div class="w-1/2">
                                 <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="user_avatar">SURAT KESEHATAN</label>
-                                <input class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" aria-describedby="user_avatar_help" id="user_avatar" type="file">
+                                <input required class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" aria-describedby="surat_kesehatan_help" id="surat_kesehatan" name="surat_kesehatan" type="file">
                                 <div class="mt-1 text-sm text-gray-500 dark:text-gray-300" id="user_avatar_help"></div>
-                            </form>
-                            <form class="w-1/2">
+                                <x-input-error :messages="$errors->get('surat_kesehatan')" class="mt-2" />
+                            </div>
+                            <div class="w-1/2">
                                 <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="user_avatar">SURAT BEBAS NARKOBA</label>
-                                <input class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" aria-describedby="user_avatar_help" id="user_avatar" type="file">
+                                <input required class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" aria-describedby="bebas_narkoba_help" id="bebas_narkoba" name="bebas_narkoba"  type="file">
                                 <div class="mt-1 text-sm text-gray-500 dark:text-gray-300" id="user_avatar_help"></div>
-                            </form>
+                                <x-input-error :messages="$errors->get('bebas_narkoba')" class="mt-2" />
+                            </div>
                         </div>
   
+                        <div class="flex space-x-4 mt-10">
                         
-                        <form class="max-w-lg mx-auto">
-                            <label class="block mb-2 mt-5 text-sm font-medium text-gray-900 dark:text-white" for="user_avatar">SKCK</label>
-                            <input class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" aria-describedby="user_avatar_help" id="user_avatar" type="file">
-                            <div class="mt-1 text-sm text-gray-500 dark:text-gray-300" id="user_avatar_help"></div>
-                        </form>
+                            <div class="w-1/2">
+                                <label class="block mb-2 mt-5 text-sm font-medium text-gray-900 dark:text-white" for="user_avatar">SKCK</label>
+                                <input required class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" aria-describedby="skck_help" id="skck" name="skck" type="file">
+                                <div class="mt-1 text-sm text-gray-500 dark:text-gray-300" id="user_avatar_help"></div>
+                                <x-input-error :messages="$errors->get('skck')" class="mt-2" />
+                            </div>
+                            <div class="w-1/2">
+                                <label class="block mb-2 mt-5 text-sm font-medium text-gray-900 dark:text-white" for="user_avatar">SURAT PENGAJUAN USER</label>
+                                <input required class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" aria-describedby="surat_keterangan_user_help" id="surat_keterangan_user"  name="surat_keterangan_user" type="file">
+                                <div class="mt-1 text-sm text-gray-500 dark:text-gray-300" id="user_avatar_help"></div>
+                                <x-input-error :messages="$errors->get('surat_keterangan_user')" class="mt-2" />
+                            </div>
+                        </div>
   
         
                     <!-- Area field -->
@@ -85,8 +96,8 @@
                         <div class="w-1/2">
                             <label for="area" class="block text-sm font-medium leading-6 text-gray-900">AREA</label>
                             <select id="area" name="area" autocomplete="country-name" class="block w-full rounded-md border-gray-300 py-2 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
-                                <option>Kantor</option>
-                                <option>Pabrik</option>
+                                <option value="kantor">Kantor</option>
+                                <option value="pabrik">Pabrik</option>
                             </select>
                             <x-input-error :messages="$errors->get('area')" class="mt-2" />
                         </div>
@@ -95,12 +106,13 @@
                         <div class="w-1/2">
                             <label for="keperluan" class="block text-sm font-medium leading-6 text-gray-900">KEPERLUAN</label>
                             <select id="keperluan" name="keperluan" onchange="showInput()" class="block w-full rounded-md border-gray-300 py-2 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
-                                <option>Rapat / Kunjungan / Meeting</option>
-                                <option>Site Visit / Survey</option>
+                                <option value="Rapat / Kunjungan / Meeting">Rapat / Kunjungan / Meeting</option>
+                                <option value="Site Visit / Survey">Site Visit / Survey</option>
                                 <option value="other">Lainnya</option>
                             </select>
-                            <input type="text" id="lainnya" name="lainnya" placeholder="Silakan isi keperluan lainnya" class="hidden mt-2 block w-full rounded-md border-gray-300 py-2 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
+                            <input  type="text" id="keperluan_lainnya" name="keperluan_lainnya" placeholder="Silakan isi keperluan lainnya" class="hidden mt-2 block w-full rounded-md border-gray-300 py-2 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
                             <x-input-error :messages="$errors->get('keperluan')" class="mt-2" />
+                            <x-input-error :messages="$errors->get('keperluan_lainnya')" class="mt-2" />
                         </div>
                     </div>
 
@@ -116,7 +128,10 @@
                                         <path d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z"/>
                                     </svg>
                                 </div>
-                                <input name="start" type="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Select date start">
+                                <input name="start" type="date" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Select date start" required>
+                                <div>
+                                    <x-input-error :messages="$errors->get('start')" class="mt-2" />
+                                </div>
                             </div>
                             <span class="mx-4 ml-2 mr-2 text-gray-500">to</span>
                             <div class="relative">
@@ -125,7 +140,10 @@
                                         <path d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z"/>
                                     </svg>
                                 </div>
-                                <input name="end" type="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Select date end">
+                                <input name="end" type="date" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Select date end" required>
+                                <div>
+                                    <x-input-error :messages="$errors->get('end')" class="mt-2" />
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -137,17 +155,18 @@
                         <div class="w-1/2">
                             <label for="tujuan_berkunjung" class="block text-md font-medium leading-6 text-gray-900">Tujuan Berkunjung</label>
                             <select id="tujuan_berkunjung" name="tujuan_berkunjung" autocomplete="country-name" class="block w-full rounded-md border-gray-300 py-2 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" onchange="showOtherInput()">
-                                <option>Zona 1 (Pemeliharaan, Lab, Istek 1&2, Bengkel, Pabrik 1-7, PPE, Dermaga)</option>
-                                <option>Zona 2 (JPP, Shiping, Plant Off Site, Pertagas, KIE, Dermaga, K3)</option>
-                                <option>Kantor Pusat (Humas, Keuangan, TJSL, PSDMO)</option>
-                                <option>Kaltim Daya Mandiri. PT</option>
-                                <option>Kaltim Methanol Industri. PT</option>
-                                <option>Kaltim Parna Industri. PT</option>
+                                <option value="Zona 1">Zona 1 (Pemeliharaan, Lab, Istek 1&2, Bengkel, Pabrik 1-7, PPE, Dermaga)</option>
+                                <option value="Zona 2">Zona 2 (JPP, Shiping, Plant Off Site, Pertagas, KIE, Dermaga, K3)</option>
+                                <option value="Kantor">Kantor Pusat (Humas, Keuangan, TJSL, PSDMO)</option>
+                                <option value="KDM">Kaltim Daya Mandiri. PT</option>
+                                <option value="KMI">Kaltim Methanol Industri. PT</option>
+                                <option value="KPI">Kaltim Parna Industri. PT</option>
                                 <option value="other">Lainnya</option>
                             </select>
                             
-                            <input type="text" id="tujuan_berkunjung_lainnya" name="tujuan_berkunjung_lainnya" placeholder="Tujuan Berkunjung Lainnya" class="hidden mt-2 block w-full rounded-md border-gray-300 py-2 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
+                            <input  type="text" id="tujuan_berkunjung_lainnya" name="tujuan_lainnya" placeholder="Tujuan Berkunjung Lainnya" class="hidden mt-2 block w-full rounded-md border-gray-300 py-2 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
                             <x-input-error :messages="$errors->get('tujuan_berkunjung')" class="mt-2" />
+                            <x-input-error :messages="$errors->get('tujuan_berkunjung_lainnya')" class="mt-2" />
                         </div>
 
                 <!-- Lama Kunjungan -->
@@ -180,27 +199,14 @@
                         <input required type="text" name="nama_perusahaan" id="first-name-1" autocomplete="given-name" class="block w-full rounded-md border-gray-300 py-2 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
                         <x-input-error :messages="$errors->get('nama_perusahaan')" class="mt-2" />
                     </div>
-        
-                    <!-- Lama Bekerja field -->
-                    <div>
-                        <label for="first-name-2" class="block text-bold font-medium leading-6 text-gray-900 mt-8">Berapa Lama Bekerja</label>
-                        <input required type="text" name="lama_bekerja" id="first-name-2" autocomplete="given-name" class="block w-full rounded-md border-gray-300 py-2 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
-                        <x-input-error :messages="$errors->get('lama_bekerja')" class="mt-2" />
-                    </div>
-        
-                    <!-- Tanggal Mulai Bekerja field -->
-                    <div>
-                        <label for="first-name-2" class="block text-bold font-medium leading-6 text-gray-900 mt-8">Tanggal Mulai Bekerja</label>
-                        <input required type="date" name="tanggal_mulai" id="first-name-2" autocomplete="given-name" class="block w-full rounded-md border-gray-300 py-2 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
-                        <x-input-error :messages="$errors->get('tanggal_mulai')" class="mt-2" />
+     
+                        <!-- Button -->
+                    <div class="mt-6 flex justify-end">
+                        <button type="button" class="rounded-md px-5 py-3 shadow-sm text-sm font-semibold leading-6 text-gray-900 hover:text-white hover:bg-red-700" onclick="window.location.href='/home';">Cancel</button>
+                        <button type="submit" class="rounded-md px-5 py-3 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 bg-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-600 ml-4">Save</button>
                     </div>
                 </div>
 
-                    <!-- Button -->
-                <div class="mt-6 flex justify-end">
-                    <button type="button" class="rounded-md px-5 py-3 shadow-sm text-sm font-semibold leading-6 text-gray-900 hover:text-white hover:bg-red-700" onclick="window.location.href='/home';">Cancel</button>
-                    <button type="submit" class="rounded-md px-5 py-3 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 bg-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-600 ml-4">Save</button>
-                </div>
             </form>
         </div>
     </div>

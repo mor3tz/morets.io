@@ -32,17 +32,24 @@ class PengajuanController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-    {
+    {      
         $request->validate([
             'nama' => ['required','string'],
             'no_ktp'=> ['required','string'],
-            'foto_ktp'=> ['required', 'image'],
-            'kartu_vaksin' => ['required', 'image'],
+            // 'foto_ktp'=> ['required', 'image'],
+            // 'kartu_vaksin' => ['required', 'image'],
+            // 'surat_kesehatan' => ['required', 'image'],
+            // 'bebas_narkoba' => ['required', 'image'],
+            // 'skck' => ['required', 'image'],
+            // 'surat_pengajuan_user' => ['required', 'image'],
             'area' => ['required'],
+            'keperluan' => ['required'],
+            'tujuan_berkunjung' => ['required'],
+            'lama_kunjungan' => ['required'],
             'unit_kerja' => ['required','string'],
             'nama_perusahaan' => ['required','string'],
-            'lama_bekerja' => ['required'],
-            'tanggal_mulai' => ['required']
+            'start' => ['required'],
+            'end' => ['required']
         ]);
 
         try {
@@ -54,23 +61,58 @@ class PengajuanController extends Controller
             $vaksin_filename_hashed = $kartu_vaksin->hashName();
             $kartu_vaksin->storeAs('public/kartu_vaksin', $vaksin_filename_hashed);
 
-            Pengajuan::create([
+            $surat_kesehatan = $request->file('surat_kesehatan');
+            $surat_kesehatan_filename_hashed = $surat_kesehatan->hashName();
+            $surat_kesehatan->storeAs('public/surat_kesehatan', $surat_kesehatan_filename_hashed);
+            
+            $bebas_narkoba = $request->file('bebas_narkoba');
+            $bebas_narkoba_filename_hashed = $bebas_narkoba->hashName();
+            $bebas_narkoba->storeAs('public/bebas_narkoba', $bebas_narkoba_filename_hashed);
+
+            $skck = $request->file('skck');
+            $skck_filename_hashed = $skck->hashName();
+            $skck->storeAs('public/skck', $skck_filename_hashed);
+
+            $surat_keterangan_user = $request->file('surat_keterangan_user');
+            $surat_keterangan_user_filename_hashed = $surat_keterangan_user->hashName();
+            $surat_keterangan_user->storeAs('public/surat_keterangan_user', $surat_keterangan_user_filename_hashed);
+
+            $pengajuanData = [
                 'user_id' => Auth::user()->id,
                 'nama' => $request->nama,
                 'no_ktp' => $request->no_ktp,
                 'foto_ktp' => $ktp_filename_hashed,
                 'kartu_vaksin' => $vaksin_filename_hashed,
+                'surat_kesehatan' => $surat_kesehatan_filename_hashed,
+                'bebas_narkoba' => $bebas_narkoba_filename_hashed,
+                'skck' => $skck_filename_hashed,
+                'surat_keterangan_user' => $surat_keterangan_user_filename_hashed,
                 'area' => $request->area,
+                'keperluan' => $request->keperluan,
+                'tujuan' => $request->tujuan_berkunjung,
                 'unit_kerja' => $request->unit_kerja,
                 'nama_perusahaan' => $request->nama_perusahaan,
-                'lama_bekerja' => $request->lama_bekerja,
-                'tanggal_mulai' => $request->tanggal_mulai,
+                'lama_kunjungan' => $request->lama_kunjungan,
+                'tanggal_mulai' => $request->start,
+                'tanggal_selesai' => $request->end,
                 'status' => "Menunggu Approval"
-            ]);
+            ];
+            
+            // Check if keperluan is "other" and set keperluan_lainnya
+            if ($request->keperluan == 'other') {
+                $pengajuanData['keperluan_lainnya'] = $request->keperluan_lainnya;
+            }
+            // Check if tujuan is "other" and set keperluan_lainnya
+            if ($request->keperluan == 'other') {
+                $pengajuanData['tujuan_lainnya'] = $request->tujuan_lainnya;
+            }
+            
+            Pengajuan::create($pengajuanData);
+
 
         } catch (\Exception $e) {
             Log::error("Error in storing data: " . $e->getMessage());
-            return redirect()->back()->with(['errors' => 'Data Gagal Disimpan!']);
+            return redirect()->back()->with(['error' => 'Data gagal disimpan!']);
         }
 
         return redirect()->route('dashboard')->with(['sukses' => 'Data Berhasil Disimpan!']);
