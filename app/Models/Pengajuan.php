@@ -16,6 +16,7 @@ class Pengajuan extends Model
     protected $fillable = [
         'user_id',
         'nama',
+        'no_hp',
         'no_ktp',
         'foto_ktp',
         'kartu_vaksin',

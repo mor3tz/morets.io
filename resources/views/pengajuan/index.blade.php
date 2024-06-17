@@ -18,11 +18,16 @@
                     <p class="mt-1 text-base font-semibold leading-6 text-gray-600 text-center">Silahkan Melengkapi Data Diri Anda.</p>
                 
                     <div class="mt-10 grid grid-cols-1 gap-y-8 sm:grid-cols-1 sm:gap-x-6">                 
-                    <div>
-                        <label for="first-name" class="block text-bold font-medium leading-6 text-gray-900 mt-3">Nama </label>
-                        <input required type="text" name="nama" id="first-name" autocomplete="given-name" class="block w-full rounded-md border-gray-300 py-2 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
-                    </div>
+                        <div>
+                            <label for="first-name" class="block text-bold font-medium leading-6 text-gray-900 mt-3">Nama </label>
+                            <input required type="text" name="nama" id="first-name" autocomplete="given-name" class="block w-full rounded-md border-gray-300 py-2 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
+                        </div>
                         <x-input-error :messages="$errors->get('nama')" class="mt-2" />
+                        <div>
+                            <label for="no_hp" class="block text-bold font-medium leading-6 text-gray-900 mt-3">No. Handphone</label>
+                            <input required type="text" name="no_hp" id="no_hp" autocomplete="family-name" class="block w-full rounded-md border-gray-300 py-2 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
+                        </div>
+                        <x-input-error :messages="$errors->get('no_hp')" class="mt-2" />
                         <div>
                             <label for="no_ktp" class="block text-bold font-medium leading-6 text-gray-900 mt-3">No. KTP</label>
                             <input required type="text" name="no_ktp" id="no_ktp" autocomplete="family-name" class="block w-full rounded-md border-gray-300 py-2 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">

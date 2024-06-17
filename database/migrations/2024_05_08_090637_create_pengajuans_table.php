@@ -16,6 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->constrainted()->onDelete('cascade');
             $table->string('nama');
+            $table->string('no_hp');
             $table->string('no_ktp');
             $table->string('foto_ktp');
             $table->string('kartu_vaksin');

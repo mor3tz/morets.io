@@ -149,7 +149,7 @@
                                                     </tr>
                                                     <tr>
                                                         <td class="py-2 px-6 ">No HandPhone</td>
-                                                        <td class="py-2 px-4 "> : 081231242342</td>
+                                                        <td class="py-2 px-4 "> : {{ $pengajuan->no_hp }}</td>
                                                     </tr>
                                                     <tr>
                                                         <td class="py-2 px-6 ">Unit Kerja</td>
@@ -225,7 +225,7 @@
                                                                 </tr>
                                                                 <tr>
                                                                     <td class="">No HandPhone</td>
-                                                                    <td class=""> : No HandPhone</td>
+                                                                    <td class=""> : {{ $pengajuan->no_hp}}</td>
                                                                 </tr>
                                                                 <tr>
                                                                     <td class="">Keperluan</td>

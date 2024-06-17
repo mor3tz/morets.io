@@ -35,6 +35,7 @@ class PengajuanController extends Controller
     {      
         $request->validate([
             'nama' => ['required','string'],
+            'no_hp'=> ['required','string'],
             'no_ktp'=> ['required','string'],
             // 'foto_ktp'=> ['required', 'image'],
             // 'kartu_vaksin' => ['required', 'image'],
@@ -80,6 +81,7 @@ class PengajuanController extends Controller
             $pengajuanData = [
                 'user_id' => Auth::user()->id,
                 'nama' => $request->nama,
+                'no_hp' => $request->no_hp,
                 'no_ktp' => $request->no_ktp,
                 'foto_ktp' => $ktp_filename_hashed,
                 'kartu_vaksin' => $vaksin_filename_hashed,
