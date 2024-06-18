@@ -12,9 +12,9 @@
         </div>
         
         <!-- header -->
-        <div class="bg-gray-100 p-10 rounded-lg">
+        <div class="bg-gray-100  p-10 rounded-lg">
             <header>
-                <h3 class="text-semibold leading-6 font-bold text-lg text-black text-center">
+                <h3 class="text-semibold  leading-6 font-bold text-lg text-black text-center">
                     INFORMASI PEMOHON
                 </h3>
                 <div id="detail-content">
@@ -72,8 +72,8 @@
                                 <td class="px-6 py-4">
                                 {{ $pengajuan->no_ktp }}
                                 </td>
-                                <td class="px-6 py-4">10/02/2022</td>
-                                <td class="px-6 py-4">13/05/2077</td>
+                                <td class="px-6 py-4">{{ $pengajuan->tanggal_mulai }} - {{ $pengajuan->tanggal_selesai }}</td>
+                                <td class="px-6 py-4">{{ $pengajuan->tanggal_selesai }}</td>
                                 <td class="px-6 py-4">
                                     @if (Auth::user()->role == 'admin')
                                         @if (isset($pengajuan->latest_status))
@@ -156,21 +156,14 @@
                                                         <td class="py-2 px-4 "> : {{ $pengajuan->unit_kerja }}</td>
                                                     </tr>
                                                     <tr>
+                                                        <td class="py-2 px-6">Area</td>
+                                                        <td class="py-2 px-4"> : {{ $pengajuan->area }}</td>
+                                                    </tr>
+                                                    <tr>
                                                         <td class="py-2 px-6 ">Nama Perusahaan/Instansi</td>
                                                         <td class="py-2 px-4 "> : {{ $pengajuan->nama_perusahaan }}</td>
                                                     </tr>
-                                                    <tr>
-                                                        <tdD></td>
-                                                        <td></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td></td>
-                                                        <td></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td></td>
-                                                        <td></td>
-                                                    </tr>.
+                                                    
                                                 </table>
                                             
                                                     <div class="text-center mt-5 text-lg border-t font-medium  rounded-lg px-4 py-2 text-black">
@@ -212,40 +205,40 @@
                                                                 </li>
                                                             </ul>
                                                             
-                                                            <h3 class="mt-5 text-base font-semibold">DATA</h3>
+                                                            <h3 class="mt-10 text-base font-semibold">DATA</h3>
 
-                                                            <table class="w-full text-sm text-left rtl:text-right text-gray dark:text-gray-400 mt-10">
+                                                            <table class="w-full text-md font-semibold text-left rtl:text-right text-gray dark:text-gray-400 mt-10">
                                                                 <tr>
-                                                                    <td class="">Nama Tamu</td>
-                                                                    <td class=""> : {{ $pengajuan->nama }}</td>
+                                                                    <td class="px-2 py-3">Nama Tamu</td>
+                                                                    <td class="px-2 py-3"> : {{ $pengajuan->nama }}</td>
                                                                 </tr>
                                                                 <tr>
-                                                                    <td class="">NIK</td>
-                                                                    <td class=""> : {{ $pengajuan->no_ktp }}</td>
+                                                                    <td class="px-2 py-3">NIK</td>
+                                                                    <td class="px-2 py-3"> : {{ $pengajuan->no_ktp }}</td>
                                                                 </tr>
                                                                 <tr>
-                                                                    <td class="">No HandPhone</td>
-                                                                    <td class=""> : {{ $pengajuan->no_hp}}</td>
+                                                                    <td class="px-2 py-3">No HandPhone</td>
+                                                                    <td class="px-2 py-3"> : {{ $pengajuan->no_hp}}</td>
                                                                 </tr>
                                                                 <tr>
-                                                                    <td class="">Keperluan</td>
+                                                                    <td class="px-2 py-2">Keperluan</td>
                                                                     @if ($pengajuan->keperluan == "other")
-                                                                        <td class="capitalize"> : {{ $pengajuan->keperluan_lainnya }}</td>
+                                                                        <td class="capitalize">  : {{ $pengajuan->keperluan_lainnya }}</td>
                                                                     @else
-                                                                        <td class="capitalize"> : {{ $pengajuan->keperluan }}</td>
+                                                                        <td class="capitalize">  : {{ $pengajuan->keperluan }}</td>
                                                                     @endif
                                                                 </tr>
                                                                 <tr>
-                                                                    <td class="">Tujuan Berkunjung</td>
+                                                                    <td class="px-2 py-2">Tujuan Berkunjung</td>
                                                                     @if ($pengajuan->tujuan == "other")
-                                                                        <td class="capitalize"> : {{ $pengajuan->tujuan_lainnya }}</td>
+                                                                        <td class="capitalize">     : {{ $pengajuan->tujuan_lainnya }}</td>
                                                                     @else
-                                                                        <td class="capitalize"> : {{ $pengajuan->tujuan }}</td>
+                                                                        <td class="capitalize">     : {{ $pengajuan->tujuan }}</td>
                                                                     @endif
                                                                 </tr>
                                                                 <tr>
-                                                                    <td class="">Tanggal Kunjungan</td>
-                                                                    <td class=""> : {{ $pengajuan->tanggal_mulai }} - {{ $pengajuan->tanggal_selesai }}</td>
+                                                                    <td class="px-2 py-3">Tanggal Kunjungan</td>
+                                                                    <td class="px-2 py-3"> : {{ $pengajuan->tanggal_mulai }} - {{ $pengajuan->tanggal_selesai }}</td>
                                                                 </tr>
                                                             </table>
                                                     </div>
@@ -255,18 +248,123 @@
                                                 <div class="flex flex-col items-center justify-start p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600">
                                                     <!-- Buttons container -->
                                                     <div class="flex justify-between  w-full space-x-4 mt-4">
-                                                        <button data-modal-hide="default-modal{{ $pengajuan->id }}" type="button" class="btn"> Back</button>
-
-                                                        @if (Auth::user()->role == 'admin')
-                                                            <button class="btn-2">Delete</button>
+                                                        {{-- button back --}}
+                                                        <button data-modal-hide="default-modal{{ $pengajuan->id }}" type="button" class="btn"> 
+                                                            <i class="fa-solid fa-arrow-left mr-2"></i>Back
+                                                        </button>
+                                                        {{-- button reject --}}
+                                                        @if(Auth::user()->role != 'admin' && Auth::user()->role != 'user')
+                                                        <button data-modal-target="reject_modal" data-modal-toggle="reject_modal" class="btn-4">
+                                                            <i class="fa-solid fa-user-xmark mr-2"></i>Reject
+                                                        </button>
                                                         @endif
-                                                        <button  class="btn-3">Accept</button>
-                                                        
+                                                        {{-- button delete --}}
+                                                        @if (Auth::user()->role == 'admin')
+                                                            <button data-modal-target="delete_modal" data-modal-toggle="delete_modal" class="btn-2">
+                                                            <i class="fa-solid fa-trash-can mr-2"></i>Delete
+                                                            </button>
+                                                        @endif
+                                                        {{-- button accept --}}
+                                                        @if (Auth::user()->role != 'admin' && Auth::user()->role != 'user')
+                                                            <button class="btn-3">
+                                                                <i class="fa-solid fa-user-check mr-2"></i>Accept
+                                                            </button>
+                                                        @endif
                                                     </div>
                                                 </div>
                                         </div>   
                                         </div>
                                     </div>
+
+                                    @if(Auth::user()->role != 'admin' && Auth::user()->role != 'user')                                     {{-- approve modal --}}
+                                        
+                                    <div id="approve_modal" tabindex="-1" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+                                            <div class="relative p-4 w-full max-w-md max-h-full">
+                                                <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                                                    <button type="button" class="absolute top-3 end-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="approve_modal">
+                                                        <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                                                        </svg>
+                                                        <span class="sr-only">Close modal</span>
+                                                    </button>
+                                                    <div class="p-4 md:p-5 text-center">
+                                                        <form action="{{ route('pengajuan.approve', $pengajuan->id) }}" method="POST" style="display: inline;">
+                                                            @csrf
+                                                            <input type="hidden" name="approval_status" value="approved">
+                                                        
+                                                            <svg class="mx-auto mb-4 text-gray-400 w-12 h-12 dark:text-gray-200" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                                                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
+                                                            </svg>
+                                                            <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">Are you sure you want to approve this aplicant</h3>
+                                                            <button data-modal-hide="approve_modal" type="submit" class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center">
+                                                                Yes, I'm sure
+                                                            </button>
+                                                            <button data-modal-hide="approve_modal" type="button" class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">No, cancel</button>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    {{-- reject modal --}}
+                                    
+                                        <div id="reject_modal" tabindex="-1" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+                                            <div class="relative p-4 w-full max-w-md max-h-full">
+                                                <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                                                    <button type="button" class="absolute top-3 end-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="reject_modal">
+                                                        <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                                                        </svg>
+                                                        <span class="sr-only">Close modal</span>
+                                                    </button>
+                                                    <div class="p-4 md:p-5 text-center">
+                                                        <form action="{{ route('pengajuan.approve', $pengajuan->id) }}" method="POST" style="display: inline;">
+                                                            @csrf
+                                                            <input type="hidden" name="approval_status" value="rejected">
+                                                            <svg class="mx-auto mb-4 text-gray-400 w-12 h-12 dark:text-gray-200" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                                                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
+                                                            </svg>
+                                                            <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">Are you sure you want to reject this aplicant</h3>
+                                                            <button data-modal-hide="reject_modal" type="submit" class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center">
+                                                                Yes, I'm sure
+                                                            </button>
+                                                            <button data-modal-hide="reject_modal" type="button" class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">No, cancel</button>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @endif
+
+                                    @if (Auth::user()->role == 'admin')
+                                    <div id="delete_modal" tabindex="-1" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+                                        <div class="relative p-4 w-full max-w-md max-h-full">
+                                            <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                                                <button type="button" class="absolute top-3 end-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="delete_modal">
+                                                    <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                                                    </svg>
+                                                    <span class="sr-only">Close modal</span>
+                                                </button>
+                                                <div class="p-4 md:p-5 text-center">
+                                                    <form action="{{ route('pengajuan.delete', $pengajuan->id) }}" method="POST" style="display: inline;">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <input type="hidden" name="approval_status" value="approved">
+                                                        <svg class="mx-auto mb-4 text-gray-400 w-12 h-12 dark:text-gray-200" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
+                                                        </svg>
+                                                        <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">Are you sure you want to delete this aplicant</h3>
+                                                        <button data-modal-hide="delete_modal" type="submit" class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center">
+                                                            Yes, I'm sure
+                                                        </button>
+                                                        <button data-modal-hide="delete_modal" type="button" class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">No, cancel</button>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    @endif
                                 </div>
                                 </div>
                                 </td>                                

@@ -28,7 +28,7 @@
         
 
               
-            @if(Auth::user()->role == 'admin')
+            @if(Auth::user()->role == 'admin' || Auth::user()->role == 'user')
             <div class="flex justify-center items-center mt-32 "> <!-- Parent container untuk tombol -->
                 <button class="continue-application">
                     <div>

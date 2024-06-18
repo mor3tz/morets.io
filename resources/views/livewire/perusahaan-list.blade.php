@@ -39,7 +39,6 @@ use Carbon\Carbon;
                     <th scope="col" class="px-6 py-3">Unit Kerja</th>
                     <th scope="col" class="px-6 py-3">Area</th>
                     <th scope="col" class="px-6 py-3">No KTP</th>
-                    <th scope="col" class="px-6 py-3">Berapa Lama Bekerja</th>
                     <th scope="col" class="px-6 py-3">Tanggal Mulai Bekerja</th>
                     <th scope="col" class="px-6 py-3">Status</th>
                     <th scope="col" class="px-6 py-3">Actions</th>
@@ -83,9 +82,6 @@ use Carbon\Carbon;
                             </td>
                             <td class="px-6 py-4">
                                 {{ $pengajuan->no_ktp }}
-                            </td>
-                            <td class="px-6 py-4">
-                                {{ $pengajuan->lama_bekerja }}
                             </td>
                             <td class="px-6 py-4">
                                 {{ $pengajuan->tanggal_mulai }}
