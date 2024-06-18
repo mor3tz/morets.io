@@ -193,7 +193,7 @@ class PengajuanController extends Controller
             $pengajuan->status = 'rejected';
             $pengajuan->save();
         }
-        if($request->approval_status == 'approved' && $user->role == 'svp_operation' || $user->role == 'vp_security'){
+        if($request->approval_status == 'approved' && $user->role == 'svp_operation' || $request->approval_status == 'approved' && $user->role == 'vp_security'){
             $pengajuan->status = 'approved';
             $pengajuan->save();
         }
@@ -204,13 +204,41 @@ class PengajuanController extends Controller
 
 
     public function manyApprove(Request $request, $nama_perusahaan){
+        // $user = Auth::user();
+        // if($request->pengajuans == null){
+        //     return redirect()->route('perusahaan', ['perusahaan' => $nama_perusahaan])->with(['error' => 'Pengajuan belum dipilih!']);
+        // }
+        // foreach($request->pengajuans as $id){
+        //     $pengajuan = Pengajuan::findOrFail($id);
+        //     if(!$pengajuan->approvals()->where('approver_role', $user->role )->where('approval_status', 'approved')->exists()){
+        //         Approval::create([
+        //             'pengajuan_id' => $pengajuan->id,
+        //             'approver_id' => $user->id,
+        //             'approver_role' => $user->role,
+        //             'approval_status' => 'approved',
+        //             'approval_date' => now(),
+        //         ]);
+        //         if( $user->role == 'svp_operation' || $user->role == 'vp_security'){
+        //             $pengajuan->status = 'approved';
+        //             $pengajuan->save();
+        //         }
+        //     }
+
+        // }
+        // return redirect()->route('perusahaan', ['perusahaan' => $nama_perusahaan])->with(['sukses'=> 'Pengajuan telah diapprove']);
         $user = Auth::user();
-        if($request->pengajuans == null){
-            return redirect()->route('perusahaan', ['perusahaan' => $nama_perusahaan])->with(['error' => 'Pengajuan belum dipilih!']);
+        $ids = $request->input('ids');
+
+        if (empty($ids)) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Pengajuan belum dipilih!'
+            ], 400);
         }
-        foreach($request->pengajuans as $id){
+
+        foreach ($ids as $id) {
             $pengajuan = Pengajuan::findOrFail($id);
-            if(!$pengajuan->approvals()->where('approver_role', $user->role )->where('approval_status', 'approved')->exists()){
+            if (!$pengajuan->approvals()->where('approver_role', $user->role)->where('approval_status', 'approved')->exists()) {
                 Approval::create([
                     'pengajuan_id' => $pengajuan->id,
                     'approver_id' => $user->id,
@@ -218,14 +246,17 @@ class PengajuanController extends Controller
                     'approval_status' => 'approved',
                     'approval_date' => now(),
                 ]);
-                if( $user->role == 'svp_operation' || $user->role == 'vp_security'){
+                if ($user->role == 'svp_operation' || $user->role == 'vp_security') {
                     $pengajuan->status = 'approved';
                     $pengajuan->save();
                 }
             }
-
         }
-        return redirect()->route('perusahaan', ['perusahaan' => $nama_perusahaan])->with(['sukses'=> 'Pengajuan telah diapprove']);
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Pengajuan telah diapprove'
+        ]);
 
     }
 
