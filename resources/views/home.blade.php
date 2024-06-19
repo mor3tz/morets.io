@@ -23,7 +23,7 @@
             <!-- Content of the page here -->
             <h2 id="floatingText" class="text-white text-4xl font-bold text-center"
                 style="padding-top: 20vh; transition: transform 0.5s ease-in-out, opacity 0.2s linear;">    
-                WELCOME TO  THE BADGE APPLICATION WEBSITE
+                SELAMAT DATANG DI APLIKASI WEBSITE PENGAJUAN BADGE
             </h2>
         
 

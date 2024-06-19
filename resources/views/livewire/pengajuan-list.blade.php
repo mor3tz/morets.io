@@ -117,8 +117,8 @@
                                         hover:bg-blue-600 focus:outline-none focus:ring-2
                                         focus:ring-blue-400 focus:ring-opacity-75 transition
                                         duration-150 ease-in-out flex items-center justify-center" type="button">
-                                            <i class="fa-regular fa-folder-open mr-2"></i>
-                                            Details
+                                        <i class="fa-solid fa-eye mr-2"></i>
+                                            View
                                         </a>
                                     </button>
                                     

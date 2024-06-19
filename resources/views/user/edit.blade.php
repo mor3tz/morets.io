@@ -32,7 +32,6 @@
                     <select name="role" class="block mt-1 rounded-md">
                         <option value="{{ $user->role }}">{{ ucfirst($user->role) }}</option>
                         <option value="user">User</option>
-                        <option value="kabag">Kepala Bagian</option>
                         <option value="vp">VP</option>
                         <option value="avp">AVP</option>
                         <option value="svp_operation">SVP Operation</option>

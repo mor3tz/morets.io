@@ -14,7 +14,7 @@ Route::middleware('auth')->group(function () {
     return view('home');
     })->middleware(['auth', 'verified'])->name('home');
     route::get('/dashboard',[PengajuanController::class, 'index'])->name('dashboard');
-    route::get('/dashboard/{perusahaan}',[PengajuanController::class, 'perusahaan'])->middleware(['role:admin,kabag,vp,avp,svp_operation,vp_security'])->name('perusahaan');
+    route::get('/dashboard/{perusahaan}',[PengajuanController::class, 'perusahaan'])->middleware(['role:admin,vp,avp,svp_operation,vp_security'])->name('perusahaan');
     Route::get('/contact', function () {
         return view('contact');
     })->name('contact');
@@ -22,9 +22,9 @@ Route::middleware('auth')->group(function () {
         return view('pengajuan.index');
     })->middleware(['role:admin,user'])->name('pengajuan');
     Route::post('pengajuan/store',[PengajuanController::class, 'store'])->middleware(['role:admin,user'])->name('pengajuan.store');
-    Route::get('pengajuan/dtail/{id}',[PengajuanController::class, 'show'])->middleware(['role:admin,kabag,vp,avp,svp_operation,vp_security'])->name('pengajuan.show');
-    Route::post('pengajuan/update/{id}',[PengajuanController::class, 'approveOrReject'])->middleware(['role:kabag,vp,avp,svp_operation,vp_security'])->name('pengajuan.approve');
-    Route::post('pengajuan/manyApprove/{perusahaan}',[PengajuanController::class, 'manyApprove'])->middleware(['role:kabag,vp,avp,svp_operation,vp_security'])->name('pengajuan.manyApprove');
+    Route::get('pengajuan/dtail/{id}',[PengajuanController::class, 'show'])->middleware(['role:admin,vp,avp,svp_operation,vp_security'])->name('pengajuan.show');
+    Route::post('pengajuan/update/{id}',[PengajuanController::class, 'approveOrReject'])->middleware(['role:vp,avp,svp_operation,vp_security'])->name('pengajuan.approve');
+    Route::post('pengajuan/manyApprove/{perusahaan}',[PengajuanController::class, 'manyApprove'])->middleware(['role:vp,avp,svp_operation,vp_security'])->name('pengajuan.manyApprove');
     Route::delete('pengajuan/{id}',[PengajuanController::class, 'delete'])->middleware(['role:admin'])->name('pengajuan.delete');
 
     Route::get('/user', [UserController::class, 'index'])->middleware(['role:admin'])->name('user.index');
