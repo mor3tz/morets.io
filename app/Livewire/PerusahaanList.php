@@ -17,7 +17,23 @@ class PerusahaanList extends Component
     
         switch ($user->role) {
             case 'admin':
-            case 'kabag':
+            // case 'kabag':
+            //     $pengajuanData = Pengajuan::orderBy('created_at', 'desc')
+            //         ->when($this->search, function ($query) {
+            //             $query->where('nama_perusahaan', 'like', '%' . $this->search . '%');
+            //         })
+            //         ->get();
+            //     break;
+            
+            case 'vp':
+                // $pengajuanData = Pengajuan::whereHas('approvals', function ($query) {
+                //         $query->where('approver_role', 'kabag')->where('approval_status', 'approved');
+                //     })
+                //     ->when($this->search, function ($query) {
+                //         $query->where('nama_perusahaan', 'like', '%' . $this->search . '%');
+                //     })
+                //     ->orderBy('created_at', 'desc')
+                //     ->get();
                 $pengajuanData = Pengajuan::orderBy('created_at', 'desc')
                     ->when($this->search, function ($query) {
                         $query->where('nama_perusahaan', 'like', '%' . $this->search . '%');
@@ -31,17 +47,7 @@ class PerusahaanList extends Component
                         $query->where('nama', 'like', '%' . $this->search . '%');
                     })
                     ->get();
-                break;
-            case 'vp':
-                $pengajuanData = Pengajuan::whereHas('approvals', function ($query) {
-                        $query->where('approver_role', 'kabag')->where('approval_status', 'approved');
-                    })
-                    ->when($this->search, function ($query) {
-                        $query->where('nama_perusahaan', 'like', '%' . $this->search . '%');
-                    })
-                    ->orderBy('created_at', 'desc')
-                    ->get();
-                break;
+                break;    
             case 'avp':
                 $pengajuanData = Pengajuan::whereHas('approvals', function ($query) {
                         $query->where('approver_role', 'vp')->where('approval_status', 'approved');

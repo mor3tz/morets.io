@@ -31,7 +31,6 @@
                     <label for="role" class="block font-bold text-slate-600">Role</label>
                     <select name="role" class="block mt-1 rounded-md border-none bg-white-custom border-gray-300">
                         <option value="user">User</option>
-                        <option value="kabag">Kepala Bagian</option>
                         <option value="vp">VP</option>
                         <option value="avp">AVP</option>
                         <option value="svp_operation">SVP Operation</option>

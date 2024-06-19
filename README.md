@@ -6,3 +6,7 @@ Untuk yang baru clone repo berikut cara menjalankan app nya
 4. php artisan key:generate
 5. npm install
 6. php artisan serve dan npm run dev (harus jalan bersamaan)
+
+username dan password buat akun admin :
+-   username : admin
+-   password : 12345678

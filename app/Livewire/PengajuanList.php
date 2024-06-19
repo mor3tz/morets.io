@@ -16,12 +16,12 @@ class PengajuanList extends Component
 
         switch ($user->role) {
             case 'admin':
-            case 'kabag':
-                break;
+            // case 'kabag':
+            //     break;
             case 'vp':
-                $query->whereHas('approvals', function ($query) {
-                    $query->where('approver_role', 'kabag')->where('approval_status', 'approved');
-                });
+                // $query->whereHas('approvals', function ($query) {
+                //     $query->where('approver_role', 'kabag')->where('approval_status', 'approved');
+                // });
                 break;
             case 'avp':
                 $query->whereHas('approvals', function ($query) {

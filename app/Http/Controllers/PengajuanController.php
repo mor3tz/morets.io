@@ -143,13 +143,13 @@ class PengajuanController extends Controller
 
         switch ($user->role) {
             case 'admin':
-            case 'kabag':
-                // Tidak perlu mengubah apa pun untuk admin dan kabag
-                break;
+            // case 'kabag':
+            //     // Tidak perlu mengubah apa pun untuk admin dan kabag
+            //     break;
             case 'vp':
-                if (!$pengajuan->approvals()->where('approver_role', 'kabag')->where('approval_status', 'approved')->exists()) {
-                    return redirect()->back();
-                }
+                // if (!$pengajuan->approvals()->where('approver_role', 'kabag')->where('approval_status', 'approved')->exists()) {
+                //     return redirect()->back();
+                // }
                 break;
             case 'avp':
                 if (!$pengajuan->approvals()->where('approver_role', 'vp')->where('approval_status', 'approved')->exists()) {
